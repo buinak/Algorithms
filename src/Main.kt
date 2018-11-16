@@ -1,8 +1,6 @@
-import Searching.BinarySearch
-import Sorting.BubbleSort
-import Sorting.InsertionSort
-import Sorting.MergeSort
-import Sorting.SelectionSort
+import collections.LinkedList
+import searching.BinarySearch
+import sorting.*
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.system.measureTimeMillis
@@ -34,10 +32,9 @@ fun getRandom(upperBound: Int) = Random().nextInt(upperBound)
 
 fun main(args: Array<String>) {
     var testList = ArrayList<Int>()
-    for (i in 1..1000) {
+    for (i in 1..100000) {
         testList.add(getRandom(1, 2770))
     }
-    println(testList.sorted().distinct().getString())
     checkSearching(testList.sorted().distinct())
     val sortingTimes = TreeMap<Int, String>()
 
@@ -87,6 +84,18 @@ fun main(args: Array<String>) {
     MergeSort(mergeSortedList)
     mergeSortedList.checkSorted()
     print(mergeSortedList.getString()).also { println() }
+    println("-----------")
+
+    println("Quick sort")
+    val quickTime = measureTimeMillis { QuickSort(ArrayList(testList)) }.toInt()
+    sortingTimes[quickTime] = "QUICK SORT"
+    println("Before sorting: ")
+    print(testList.getString()).also { println() }
+    println("After sorting: ")
+    val quickSortedList = ArrayList(testList)
+    QuickSort(quickSortedList)
+    quickSortedList.checkSorted()
+    print(quickSortedList.getString()).also { println() }
     println("-----------")
 
     println("Sorting times, from fastest to slowest..")

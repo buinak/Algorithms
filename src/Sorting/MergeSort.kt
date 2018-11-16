@@ -1,4 +1,4 @@
-package Sorting
+package sorting
 
 class MergeSort (list: MutableList<Int>) {
     init {

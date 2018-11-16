@@ -1,4 +1,4 @@
-package Sorting
+package sorting
 
 class InsertionSort (list: MutableList<Int>) {
     init {

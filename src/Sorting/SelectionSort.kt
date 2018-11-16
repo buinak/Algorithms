@@ -1,4 +1,4 @@
-package Sorting
+package sorting
 
 class SelectionSort (list: MutableList<Int>) {
     init {

@@ -1,4 +1,4 @@
-package Searching
+package searching
 
 object BinarySearch {
     fun search(list: List<Int>, value: Int, startIndex: Int = 0, endIndex: Int = list.size - 1): Int{
