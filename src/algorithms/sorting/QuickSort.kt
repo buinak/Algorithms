@@ -1,14 +1,9 @@
-package sorting
+package algorithms.sorting
 
-import swap
+import utils.swap
 
-class QuickSort (list: MutableList<Int>) {
-    init {
-        quicksort(list, 0, list.size - 1)
-    }
-
-    private fun quicksort(list: MutableList<Int>, low: Int, high: Int){
-        fun partition(list: MutableList<Int>, low: Int, high: Int): Int{
+    fun <T: Comparable<T>> quicksort(list: MutableList<T>, low: Int = 0, high: Int = list.size - 1){
+        fun partition(list: MutableList<T>, low: Int, high: Int): Int{
             val pivot = list[high]
             var i = low - 1
             for (j in low until high){
@@ -27,5 +22,5 @@ class QuickSort (list: MutableList<Int>) {
             quicksort(list, low, mid - 1)
             quicksort(list, mid + 1, high)
         }
-    }
+
 }

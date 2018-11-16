@@ -1,105 +1,83 @@
-import collections.LinkedList
-import searching.BinarySearch
-import sorting.*
+import algorithms.sorting.*
+import statistics.SortDataEntity
+import utils.checkSearching
+import utils.checkSorted
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.random.Random
 import kotlin.system.measureTimeMillis
-
-fun <T> List<T>.getString(): String {
-    if (size > 10000) return " The list is too long to output!"
-    var string = ""
-    forEach { string += "$it, " }
-    string = string.trimEnd(' ')
-    string = string.trimEnd(',')
-    return string
-}
-
-fun <T : Comparable<T>> List<T>.checkSorted() {
-    if (this != this.sorted()) println("Unsorted, quitting..").also { return }
-}
-
-fun checkSearching(list: List<Int>){
-    list.forEachIndexed { index, element -> if (BinarySearch.search(list, element) != index) println("Binary search failed for $element at $index, returned ${BinarySearch.search(list, element)}!")
-        .also { Runtime.getRuntime().exit(-11) }  }
-    println("Binary search works properly!")
-}
-
-fun getRandom(lowerBound: Int, upperBound: Int) = Random().nextInt(upperBound - lowerBound) + lowerBound
-
-fun getRandom(upperBound: Int) = Random().nextInt(upperBound)
-
 
 
 fun main(args: Array<String>) {
     var testList = ArrayList<Int>()
-    for (i in 1..100000) {
-        testList.add(getRandom(1, 2770))
+    for (i in 1..25000) {
+        testList.add(Random.nextInt(0, 100000100))
     }
-    checkSearching(testList.sorted().distinct())
-    val sortingTimes = TreeMap<Int, String>()
+    testList
+        .sorted()
+        .distinct()
+        .checkSearching()
 
-    println("Bubble sort")
-    val bubbleTime = measureTimeMillis { BubbleSort(ArrayList(testList)) }.toInt()
-    sortingTimes[bubbleTime] = "BUBBLE SORT"
-    println("Before sorting: ")
-    print(testList.getString()).also { println() }
-    println("After sorting: ")
-    val bubbleSortedList = ArrayList(testList)
-    BubbleSort(bubbleSortedList)
-    bubbleSortedList.checkSorted()
-    print(bubbleSortedList.getString()).also { println() }
-    println("-----------")
+    val sortingTimes = TreeSet<SortDataEntity>()
+    val sortArray = booleanArrayOf(true, true, true, true, true)
 
-    println("Selection sort")
-    val selectionTime = measureTimeMillis { SelectionSort(ArrayList(testList)) }.toInt()
-    sortingTimes[selectionTime] = "SELECTION SORT"
-    println("Before sorting: ")
-    print(testList.getString()).also { println() }
-    println("After sorting: ")
-    val selectionSortedList = ArrayList(testList)
-    SelectionSort(selectionSortedList)
-    selectionSortedList.checkSorted()
-    print(selectionSortedList.getString()).also { println() }
-    println("-----------")
+    //bubble sort
+    if (sortArray[0]) {
+        println("BUBBLE SORT algorithms.sorting..")
+        val bubbleTime = measureTimeMillis { bubbleSort(ArrayList(testList)) }.toInt()
+        sortingTimes.add(SortDataEntity("BUBBLE SORT", bubbleTime))
+        val bubbleSortedList = ArrayList(testList)
+        bubbleSort(bubbleSortedList)
+        bubbleSortedList.checkSorted()
+        println("-----------")
+    }
 
-    println("Insertion sort")
-    val insertionTime = measureTimeMillis { InsertionSort(ArrayList(testList)) }.toInt()
-    sortingTimes[insertionTime] = "INSERTION SORT"
-    println("Before sorting: ")
-    print(testList.getString()).also { println() }
-    println("After sorting: ")
-    val insertionSortedList = ArrayList(testList)
-    InsertionSort(insertionSortedList)
-    insertionSortedList.checkSorted()
-    print(insertionSortedList.getString()).also { println() }
-    println("-----------")
+    //selection sort
+    if (sortArray[1]) {
+        println("SELECTION SORT algorithms.sorting..")
+        val selectionTime = measureTimeMillis { selectionSort(ArrayList(testList)) }.toInt()
+        sortingTimes.add(SortDataEntity("SELECTION SORT", selectionTime))
+        val selectionSortedList = ArrayList(testList)
+        selectionSort(selectionSortedList)
+        selectionSortedList.checkSorted()
+        println("-----------")
+    }
 
-    println("Merge sort")
-    val mergeTime = measureTimeMillis { MergeSort(ArrayList(testList)) }.toInt()
-    sortingTimes[mergeTime] = "MERGE SORT"
-    println("Before sorting: ")
-    print(testList.getString()).also { println() }
-    println("After sorting: ")
-    val mergeSortedList = ArrayList(testList)
-    MergeSort(mergeSortedList)
-    mergeSortedList.checkSorted()
-    print(mergeSortedList.getString()).also { println() }
-    println("-----------")
+    //insertion sort
+    if (sortArray[2]) {
+        println("INSERTION SORT algorithms.sorting..")
+        val insertionTime = measureTimeMillis { insertionSort(ArrayList(testList)) }.toInt()
+        sortingTimes.add(SortDataEntity("INSERTION SORT", insertionTime))
+        val insertionSortedList = ArrayList(testList)
+        insertionSort(insertionSortedList)
+        insertionSortedList.checkSorted()
+        println("-----------")
+    }
 
-    println("Quick sort")
-    val quickTime = measureTimeMillis { QuickSort(ArrayList(testList)) }.toInt()
-    sortingTimes[quickTime] = "QUICK SORT"
-    println("Before sorting: ")
-    print(testList.getString()).also { println() }
-    println("After sorting: ")
-    val quickSortedList = ArrayList(testList)
-    QuickSort(quickSortedList)
-    quickSortedList.checkSorted()
-    print(quickSortedList.getString()).also { println() }
-    println("-----------")
+    //merge sort
+    if (sortArray[3]) {
+        println("MERGE SORT algorithms.sorting..")
+        val mergeTime = measureTimeMillis { mergeSortSentinel(ArrayList(testList)) }.toInt()
+        sortingTimes.add(SortDataEntity("MERGE SORT", mergeTime))
+        val mergeSortedList = ArrayList(testList)
+        mergeSortSentinel(mergeSortedList)
+        mergeSortedList.checkSorted()
+        println("-----------")
+    }
+
+    //quick sort
+    if (sortArray[4]) {
+        println("QUICK SORT algorithms.sorting..")
+        val quickTime = measureTimeMillis { quicksort(ArrayList(testList)) }.toInt()
+        sortingTimes.add(SortDataEntity("QUICK SORT", quickTime))
+        val quickSortedList = ArrayList(testList)
+        quicksort(quickSortedList)
+        quickSortedList.checkSorted()
+        println("-----------")
+    }
 
     println("Sorting times, from fastest to slowest..")
-    sortingTimes.forEach { time, name -> println("Time to sort a list of ${testList.size} elements using $name = $time ms") }
+    sortingTimes.forEach { println("Time to sort a list of ${testList.size} elements using ${it.sortName} = ${it.time} ms") }
 
     readLine()
 }
