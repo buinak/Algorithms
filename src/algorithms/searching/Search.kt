@@ -21,6 +21,8 @@ fun <T> plainSearch(list: List<T>, value: T): Int {
  * Time complexity per case:
  *      Best - O(1), constant. In case the element is in the very middle.
  *      Average, Worst - O(log n), logarithmic.
+ *
+ * @author Konstantin Buinak (https://github.com/buinak)
  */
 fun <T : Comparable<T>> binarySearch(list: List<T>, value: T, startIndex: Int = 0, endIndex: Int = list.size - 1): Int {
     if (endIndex >= startIndex) {

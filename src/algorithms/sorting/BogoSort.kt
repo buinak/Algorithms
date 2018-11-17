@@ -2,6 +2,8 @@ package algorithms.sorting
 
 /**
  * Very inefficient. O((n+1)!)
+ *
+ * @author Konstantin Buinak (https://github.com/buinak)
  */
 fun bogoSort(list: MutableList<Int>) {
     fun isSorted(list: List<Int>): Boolean {

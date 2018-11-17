@@ -16,10 +16,10 @@ private fun <T : Comparable<T>> merge(list: MutableList<T>, start: Int, mid: Int
     var leftList = ArrayList<T>(numLeft + 1)
     val rightList = ArrayList<T>(numRight + 1)
     for (i in 1..numLeft) {
-        leftList[i - 1] = list[start + i - 1]
+        leftList.add(list[start + i - 1])
     }
     for (i in 1..numRight) {
-        rightList[i - 1] = list[mid + i]
+        rightList.add(list[mid + i])
     }
     var i = 0
     var j = 0

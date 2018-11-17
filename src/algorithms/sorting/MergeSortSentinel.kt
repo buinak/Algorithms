@@ -10,6 +10,8 @@ package algorithms.sorting
  *
  * Space complexity:
  *      Auxiliary O(n) memory.
+ *
+ * @author Konstantin Buinak (https://github.com/buinak)
  */
 
 fun mergeSortSentinel(list: MutableList<Int>, start: Int = 0, end: Int = list.size - 1) {

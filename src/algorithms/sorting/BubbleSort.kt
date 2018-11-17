@@ -11,6 +11,8 @@ import utils.swap
  *
  * Time complexity: Best case: O(n) for an almost sorted list. Average/Worst case: O(n^2)
  * Space complexity: O(1) auxiliary
+ *
+ * @author Konstantin Buinak (https://github.com/buinak)
  */
 fun <T : Comparable<T>> bubbleSort(list: MutableList<T>) {
     var swapped: Boolean

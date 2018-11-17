@@ -1,6 +1,6 @@
 import algorithms.sorting.*
 import statistics.SortDataEntity
-import utils.checkSearching
+import utils.isBinarySearcheable
 import utils.checkSorted
 import java.util.*
 import kotlin.collections.ArrayList
@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
     testList
         .sorted()
         .distinct()
-        .checkSearching()
+        .isBinarySearcheable()
 
     val sortingTimes = TreeSet<SortDataEntity>()
     val sortArray = booleanArrayOf(true, true, true, true, true)
