@@ -1,5 +1,5 @@
 package test
 
 object TestConstants {
-    const val AMOUNT_OF_LISTS = 500
+    const val AMOUNT_OF_TESTS = 500
 }

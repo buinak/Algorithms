@@ -4,8 +4,7 @@ import main.datastructures.LinkedList
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.junit.BeforeClass
-import test.TestConstants.AMOUNT_OF_LISTS
+import test.TestConstants.AMOUNT_OF_TESTS
 import kotlin.random.Random
 
 class LinkedListTest {
@@ -13,7 +12,7 @@ class LinkedListTest {
 
     @Test
     fun addAndGetShouldWork() {
-        for (i in 1..AMOUNT_OF_LISTS) {
+        for (i in 1..AMOUNT_OF_TESTS) {
             val linkedList = LinkedList<Int>()
             val standardList = ArrayList<Int>()
             (1..100).forEach {
@@ -27,7 +26,7 @@ class LinkedListTest {
 
     @Test
     fun size() {
-        for (i in 1..AMOUNT_OF_LISTS) {
+        for (i in 1..AMOUNT_OF_TESTS) {
             val linkedList = LinkedList<Int>()
             val rndSize = Random.nextInt(1, 12345)
             (1..rndSize).forEach { linkedList.add(Random.nextInt(1, 1234567)) }

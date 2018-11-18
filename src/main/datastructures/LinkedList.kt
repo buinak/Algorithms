@@ -4,7 +4,7 @@ import java.lang.Exception
 
 /**
  * Singly-linked list of elements.
- * Supports add_and_get_should_work(), get(i), getLast() and size()
+ * Supports add(), get(i), and size()
  *
  * @author Konstantin Buinak (https://github.com/buinak)
  */
@@ -45,7 +45,7 @@ class LinkedList<T> {
     }
 
     fun size() = length
-
+    fun isEmpty() = length == 0
 
     inner class Node<T>(val contents: T, var nextNode: Node<T>? = null)
 }

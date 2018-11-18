@@ -3,7 +3,7 @@ package test.utils
 import org.junit.Test
 
 import org.junit.Assert.*
-import test.TestConstants.AMOUNT_OF_LISTS
+import test.TestConstants.AMOUNT_OF_TESTS
 import main.utils.checkSorted
 import main.utils.generateRandomList
 import main.utils.isBinarySearcheable
@@ -14,7 +14,7 @@ class ListExtensionsTest {
 
     @Test
     fun swap() {
-        for (i in 1..AMOUNT_OF_LISTS){
+        for (i in 1..AMOUNT_OF_TESTS){
             val list = generateRandomList(Random.nextInt(2, 25000), 1..1234567)
             list.forEachIndexed { index, element ->
                 val rndIndex = Random.nextInt(0, list.size - 1)
@@ -29,7 +29,7 @@ class ListExtensionsTest {
 
     @Test
     fun checkSorted() {
-        for (i in 1..AMOUNT_OF_LISTS){
+        for (i in 1..AMOUNT_OF_TESTS){
             var list: List<Int> = generateRandomList(Random.nextInt(2, 25000), 1..1234567)
             var isSorted = Random.nextBoolean()
             if (isSorted){
@@ -41,7 +41,7 @@ class ListExtensionsTest {
 
     @Test
     fun isBinarySearcheable() {
-        for (i in 1..AMOUNT_OF_LISTS){
+        for (i in 1..AMOUNT_OF_TESTS){
             var list: List<Int> = generateRandomList(Random.nextInt(2, 25000), 1..1234567)
             var isBinarySearchable = Random.nextBoolean()
             if (isBinarySearchable){

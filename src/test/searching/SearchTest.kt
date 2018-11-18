@@ -3,7 +3,7 @@ package test.searching
 import main.algorithms.searching.binarySearch
 import main.algorithms.searching.plainSearch
 import org.junit.Assert.*
-import test.TestConstants.AMOUNT_OF_LISTS
+import test.TestConstants.AMOUNT_OF_TESTS
 import main.utils.generateRandomList
 import kotlin.random.Random
 
@@ -11,7 +11,7 @@ class SearchTest {
     @org.junit.Test
     fun plainSearch() {
         //slower than binary
-        for (i in 1..AMOUNT_OF_LISTS / 4) {
+        for (i in 1..AMOUNT_OF_TESTS / 4) {
             val distinctRandomList = generateRandomList(Random.nextInt(100, 10000), 0..1234567)
                 .distinct()
 
@@ -23,7 +23,7 @@ class SearchTest {
 
     @org.junit.Test
     fun binarySearch() {
-        //I just didn't feel like removing this, but fully random and automated is obviously better..
+        //I just didn't feel like removing this
 
         /*
         //A sorted list containing an odd amount of integers.
@@ -40,7 +40,7 @@ class SearchTest {
         val randomRandomList = generateRandomList(Random.nextInt(5, 1000), 0..255).distinct().sorted()
         */
 
-        for (i in 1..AMOUNT_OF_LISTS) {
+        for (i in 1..AMOUNT_OF_TESTS) {
             val sortedDistinctRandomList = generateRandomList(Random.nextInt(100, 10000), 0..1234567)
                 .sorted()
                 .distinct()

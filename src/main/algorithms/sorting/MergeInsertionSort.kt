@@ -71,7 +71,7 @@ fun main(args: Array<String>) {
         var list4 = ArrayList(testList)
         averageSentinel += measureTimeMillis { mergeSortSentinel(list1) }
         averagePlain += measureTimeMillis { mergeSortSentinel(list3) }
-        averageQuick += measureTimeMillis { quicksort(list4) }
+        averageQuick += measureTimeMillis { quickSort(list4) }
         for (entry in averageInsertionMap) {
             var list2 = ArrayList(testList)
             entry.setValue(entry.value + measureTimeMillis {

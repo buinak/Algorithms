@@ -2,7 +2,6 @@ package main
 
 import main.algorithms.sorting.*
 import main.utils.checkSorted
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
@@ -69,10 +68,10 @@ fun main(args: Array<String>) {
     if (sortArray[4]) {
         println("QUICK SORT sorting..")
         var tmpArrayList = ArrayList(testList)
-        val quickTime = measureTimeMillis { quicksort(tmpArrayList) }.toInt()
+        val quickTime = measureTimeMillis { quickSort(tmpArrayList) }.toInt()
         sortingTimes.add(SortDataEntity("QUICK SORT", quickTime))
         val quickSortedList = ArrayList(testList)
-        quicksort(quickSortedList)
+        quickSort(quickSortedList)
         quickSortedList.checkSorted()
         println("-----------")
     }
