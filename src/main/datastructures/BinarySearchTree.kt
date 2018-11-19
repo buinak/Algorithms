@@ -2,10 +2,12 @@ package main.datastructures
 
 import kotlin.random.Random
 
-class BinarySearchTree<T: Comparable<T>> {
+
+
+class BinarySearchTree<T : Comparable<T>> {
     private var root: Node<T>? = null
 
-    fun insert(element: T, node: Node<T>? = root){
+    fun insert(element: T, node: Node<T>? = root) {
         if (node == null) {
             root = Node(element)
             return
@@ -24,33 +26,61 @@ class BinarySearchTree<T: Comparable<T>> {
         }
     }
 
+    fun delete(element: T) {
+        if (root == null) return else {
+            val currentRoot = root as Node<T>
+            if (currentRoot.contents == element) {
+                when (currentRoot.countChildren()){
+                    0 -> root = null
+                    1 -> root = if (currentRoot.left != null) currentRoot.left else currentRoot.right
+                    2 -> {
+                        val minimumValue = currentRoot.right!!.minimumValue()
+                        currentRoot.right!!.removeChild(minimumValue, currentRoot)
+                        currentRoot.contents = minimumValue
+                    }
+                }
+            } else {
+                currentRoot.removeChild(element)
+            }
+
+        }
+    }
+
     fun contains(element: T, node: Node<T>? = root): Boolean {
         if (node == null) return false
         if (node.contents == element) return true
         return if (element > node.contents) contains(element, node.right) else contains(element, node.left)
     }
 
-    fun depthFirstTraverseWithLevel(function: (T, Int) -> Unit, node: Node<T>? = root, level: Int = 1){
-        if (node == null) return
-        if (node.left != null) depthFirstTraverseWithLevel(function, node.left, level + 1)
+    fun depthFirstTraverseWithLevel(function: (T, Int) -> Unit) {
+        if (root == null) return
+        depthFirstTraverseWithLevel(function, root!!, 1)
+    }
+
+    private fun depthFirstTraverseWithLevel(function: (T, Int) -> Unit, node: Node<T>, level: Int = 1) {
+        if (node.left != null) depthFirstTraverseWithLevel(function, node.left!!, level + 1)
         function(node.contents, level)
-        if (node.right != null) depthFirstTraverseWithLevel(function, node.right, level + 1)
+        if (node.right != null) depthFirstTraverseWithLevel(function, node.right!!, level + 1)
     }
 
-    fun depthFirstTraverse(function: (T) -> Unit, node: Node<T>? = root){
-        if (node == null) return
-        if (node.left != null) depthFirstTraverse(function, node.left)
+    fun depthFirstTraverse(function: (T) -> Unit) {
+        if (root == null) return
+        depthFirstTraverse(function, root!!)
+    }
+
+    private fun depthFirstTraverse(function: (T) -> Unit, node: Node<T>) {
+        if (node.left != null) depthFirstTraverse(function, node.left!!)
         function(node.contents)
-        if (node.right != null) depthFirstTraverse(function, node.right)
+        if (node.right != null) depthFirstTraverse(function, node.right!!)
     }
 
-    fun breadthFirstTraverse(function: (T) -> Unit){
+    fun breadthFirstTraverse(function: (T) -> Unit) {
         val queue = Queue<Node<T>>()
         if (root == null) return
 
         val rootNode = root as Node<T>
         queue.enqueue(rootNode)
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             val currNode: Node<T> = queue.dequeue() ?: continue
             function(currNode.contents)
             if (currNode.left != null) queue.enqueue(currNode.left!!)
@@ -58,11 +88,11 @@ class BinarySearchTree<T: Comparable<T>> {
         }
     }
 
-    fun getLevel(element: T): Int{
+    fun getLevel(element: T): Int {
         if (!contains(element)) return -1
         var currentLevel = 1
         var currentNode = root as Node<T>
-        while (currentNode.contents != element){
+        while (currentNode.contents != element) {
             currentLevel++
             currentNode = if (element > currentNode.contents) currentNode.right!! else currentNode.left!!
         }
@@ -70,8 +100,83 @@ class BinarySearchTree<T: Comparable<T>> {
     }
 
 
-    inner class Node<T: Comparable<T>>(var contents: T){
+    inner class Node<T : Comparable<T>>(var contents: T) {
         var left: Node<T>? = null
         var right: Node<T>? = null
+
+        //If there is no parent node, it is not going to be used.
+        //To avoid null-related errors, in case if it is not passed we put a placeholder node inside of it.
+        fun removeChild(value: T, parentNode: Node<T> = Node(value)) {
+            val left = left
+            val right = right
+
+            if (value < this.contents) {
+                left?.removeChild(value, this)
+            } else if (value > this.contents) {
+                right?.removeChild(value, this)
+            } else {
+                if (left != null && right != null) {
+                    this.contents = right.minimumValue()
+                    right.removeChild(this.contents, this)
+                } else if (parentNode.left == this) {
+                    parentNode.left = left ?: right
+                } else if (parentNode.right == this) {
+                    parentNode.right = left ?: right
+                }
+            }
+        }
+
+        fun countChildren(): Int {
+            var count = 0
+            if (left != null) count++
+            if (right != null) count++
+            return count
+        }
+
+        fun minimumValue(): T = when (left) {
+            null -> contents
+            else -> left!!.minimumValue()
+        }
+
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Node<*>
+
+            if (contents != other.contents) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            return contents.hashCode()
+        }
     }
+}
+
+fun main(args: Array<String>) {
+    val tree = BinarySearchTree<Int>()
+    val list = ArrayList<Int>()
+    for (i in 1..10) {
+        Random.nextInt(1, 50).run {
+            if (!tree.contains(this)) {
+                list.add(this)
+                tree.insert(this)
+            }
+        }
+        tree.insert(Random.nextInt(1, 50))
+    }
+    tree.depthFirstTraverse({ element -> print("$element, ") })
+    val root = list[0]
+    tree.delete(root)
+    println()
+    println("Removed $root from the tree")
+    tree.depthFirstTraverse({ element -> print("$element, ") })
+//    val elem = list.shuffled().first()
+//    println()
+//    println("Removing $elem from the tree")
+//    tree.delete(elem)
+//    tree.depthFirstTraverse({ element -> print("$element, ")})
 }
