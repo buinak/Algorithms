@@ -155,28 +155,3 @@ class BinarySearchTree<T : Comparable<T>> {
         }
     }
 }
-
-fun main(args: Array<String>) {
-    val tree = BinarySearchTree<Int>()
-    val list = ArrayList<Int>()
-    for (i in 1..10) {
-        Random.nextInt(1, 50).run {
-            if (!tree.contains(this)) {
-                list.add(this)
-                tree.insert(this)
-            }
-        }
-        tree.insert(Random.nextInt(1, 50))
-    }
-    tree.depthFirstTraverse({ element -> print("$element, ") })
-    val root = list[0]
-    tree.delete(root)
-    println()
-    println("Removed $root from the tree")
-    tree.depthFirstTraverse({ element -> print("$element, ") })
-//    val elem = list.shuffled().first()
-//    println()
-//    println("Removing $elem from the tree")
-//    tree.delete(elem)
-//    tree.depthFirstTraverse({ element -> print("$element, ")})
-}
