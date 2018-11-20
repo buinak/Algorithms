@@ -71,7 +71,7 @@ class BinarySearchTreeTest {
             }
             val sortedList = ArrayList(list.sorted())
             val listBeforeDeletion = ArrayList<Int>()
-            tree.depthFirstTraverse { element -> listBeforeDeletion.add(element)}
+            tree.orderedTraverse { element -> listBeforeDeletion.add(element)}
             assertTrue(listBeforeDeletion.containsAll(sortedList))
             assertEquals(sortedList[0], listBeforeDeletion[0])
 
@@ -80,7 +80,7 @@ class BinarySearchTreeTest {
                 tree.delete(randomElement)
                 sortedList.remove(randomElement)
                 val listAfterDeletion = ArrayList<Int>()
-                tree.depthFirstTraverse { element -> listAfterDeletion.add(element) }
+                tree.orderedTraverse { element -> listAfterDeletion.add(element) }
                 assertEquals(sortedList, listAfterDeletion)
             }
         }
@@ -106,7 +106,7 @@ class BinarySearchTreeTest {
             }
             var sortedInitialList = list.distinct().sorted()
             var sortedTreeList = ArrayList<Int>()
-            tree.depthFirstTraverse({ element -> sortedTreeList.add(element) })
+            tree.orderedTraverse({ element -> sortedTreeList.add(element) })
             assertEquals(sortedInitialList, sortedTreeList)
         }
     }

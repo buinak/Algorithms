@@ -1,5 +1,7 @@
 package main.datastructures
 
+import kotlin.random.Random
+
 class RedBlackTree<T : Comparable<T>> {
 
     var root: Node<T>? = null
@@ -78,15 +80,15 @@ class RedBlackTree<T : Comparable<T>> {
         root?.colorBlack = true
     }
 
-    fun depthFirstTraverse(function: (T) -> Unit) {
+    fun orderedTraverse(function: (T) -> Unit) {
         if (root == null) return
-        depthFirstTraverse(function, root!!)
+        orderedTraverse(function, root!!)
     }
 
-    private fun depthFirstTraverse(function: (T) -> Unit, node: Node<T>) {
-        if (node.left != null) depthFirstTraverse(function, node.left!!)
+    private fun orderedTraverse(function: (T) -> Unit, node: Node<T>) {
+        if (node.left != null) orderedTraverse(function, node.left!!)
         function(node.contents)
-        if (node.right != null) depthFirstTraverse(function, node.right!!)
+        if (node.right != null) orderedTraverse(function, node.right!!)
     }
 
     fun breadthFirstTraverse(function: (T) -> Unit) {
@@ -178,4 +180,12 @@ class RedBlackTree<T : Comparable<T>> {
             }
         }
     }
+}
+
+fun main(args: Array<String>) {
+    val tree = RedBlackTree<Int>()
+    for (i in 1..30){
+        tree.insert(Random.nextInt(1, 12345))
+    }
+    tree.orderedTraverse { str -> print("$str, ") }
 }

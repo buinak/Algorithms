@@ -1,8 +1,5 @@
 package main.datastructures
 
-import kotlin.random.Random
-
-
 
 class BinarySearchTree<T : Comparable<T>> {
     private var root: Node<T>? = null
@@ -52,26 +49,26 @@ class BinarySearchTree<T : Comparable<T>> {
         return if (element > node.contents) contains(element, node.right) else contains(element, node.left)
     }
 
-    fun depthFirstTraverseWithLevel(function: (T, Int) -> Unit) {
+    fun orderedTraverseWithLevel(function: (T, Int) -> Unit) {
         if (root == null) return
-        depthFirstTraverseWithLevel(function, root!!, 1)
+        orderedTraverseWithLevel(function, root!!, 1)
     }
 
-    private fun depthFirstTraverseWithLevel(function: (T, Int) -> Unit, node: Node<T>, level: Int = 1) {
-        if (node.left != null) depthFirstTraverseWithLevel(function, node.left!!, level + 1)
+    private fun orderedTraverseWithLevel(function: (T, Int) -> Unit, node: Node<T>, level: Int = 1) {
+        if (node.left != null) orderedTraverseWithLevel(function, node.left!!, level + 1)
         function(node.contents, level)
-        if (node.right != null) depthFirstTraverseWithLevel(function, node.right!!, level + 1)
+        if (node.right != null) orderedTraverseWithLevel(function, node.right!!, level + 1)
     }
 
-    fun depthFirstTraverse(function: (T) -> Unit) {
+    fun orderedTraverse(function: (T) -> Unit) {
         if (root == null) return
-        depthFirstTraverse(function, root!!)
+        orderedTraverse(function, root!!)
     }
 
-    private fun depthFirstTraverse(function: (T) -> Unit, node: Node<T>) {
-        if (node.left != null) depthFirstTraverse(function, node.left!!)
+    private fun orderedTraverse(function: (T) -> Unit, node: Node<T>) {
+        if (node.left != null) orderedTraverse(function, node.left!!)
         function(node.contents)
-        if (node.right != null) depthFirstTraverse(function, node.right!!)
+        if (node.right != null) orderedTraverse(function, node.right!!)
     }
 
     fun breadthFirstTraverse(function: (T) -> Unit) {
