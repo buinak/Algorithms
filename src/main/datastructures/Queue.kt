@@ -25,7 +25,7 @@ class Queue<T> {
     private var size = 0
 
     /**
-     * Puts an element on the top of the queue.
+     * Puts an element on the tail (end) of the queue.
      * There are three cases to cover:
      *     The first case, where the queue does not contain any elements yet.
      *     In this case, we create the node and assign the head variable to equal
@@ -39,21 +39,32 @@ class Queue<T> {
      *     In this case, we link the tail to the newly made node and reassign the tail
      *     to be the newly made node.
      */
-
     fun enqueue(element: T) {
         when (size) {
             0 -> head = Node(element)
-            1 -> Node(element, head).run {
+            1 -> Node(element).run {
                 tail = this
                 head?.nextNode = this
             }
-            else -> Node(element, tail).run {
+            else -> Node(element).run {
                 tail?.nextNode = this
                 tail = this
             }
         }.also { size++ }
     }
 
+    /**
+     * Returns the element from the head (start) of the queue.
+     * It always returns the head.
+     *
+     * There are two extra cases to cover:
+     *      The first case happens when the queue doesn't contain any elements.
+     *      In this case we don't decrement the size and just return null.
+     *
+     *      The second case happens when the size is 2.
+     *      In this case we nullify the tail of the queue so that enqueuing
+     *      works correctly.
+     */
     fun dequeue(): T? {
         val result = head?.contents
         when (size) {
@@ -65,24 +76,33 @@ class Queue<T> {
         return result
     }
 
+    /**
+     * Returns whether or not an element is present in the queue.
+     * Returns true if an element is in the queue.
+     * Returns false if an element is not present in the queue.
+     *
+     * contains() iterates through the queue until the current iterated element
+     * is null. In this case it returns false.
+     * If it finds an element that equals to the parametre passed, it returns true.
+     */
     fun contains(element: T): Boolean {
         var currElement: Node<T>? = head
-        while (currElement != null) if (currElement == element) return true
+        while (currElement != null) if (currElement.contents == element) return true
         else currElement = head?.nextNode
         return false
     }
 
+    /**
+     * Returns whether or not the queue is empty.
+     * If the size is equal to 0, the queue is empty.
+     */
     fun isEmpty() = size == 0
+
+    /**
+     * Returns the queue's current size.
+     */
     fun size() = size
 
     inner class Node<T>(val contents: T,
-                        var previousNode: Node<T>? = null,
                         var nextNode: Node<T>? = null)
-}
-
-fun main(args: Array<String>) {
-    val q = Queue<Int>()
-    q.enqueue(1)
-    println("q contains $1 = ${q.contains(1)}")
-    println("q contains $2 = ${q.contains(2)}")
 }
