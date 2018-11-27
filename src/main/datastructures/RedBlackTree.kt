@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 class RedBlackTree<T : Comparable<T>> {
 
-    var root: Node<T>? = null
+    private var root: Node<T>? = null
 
     fun insert(element: T) {
         var father: Node<T>? = null
@@ -122,18 +122,21 @@ class RedBlackTree<T : Comparable<T>> {
         return if (element > node.contents) contains(element, node.right) else contains(element, node.left)
     }
 
+    fun getMinimum(): T? {
+        val root: Node<T>? = root ?: return null
+        if (root!!.left == null) return root.contents
+
+        var currElement = root
+        while (currElement?.left != null){
+            currElement = currElement.left
+        }
+
+        return currElement!!.contents
+    }
+
     inner class Node<T : Comparable<T>>(var contents: T, var parent: Node<T>? = null, var colorBlack: Boolean = false) {
         var left: Node<T>? = null
         var right: Node<T>? = null
-
-        fun isLeaf(): Boolean = (this.left == null) && (this.right == null)
-
-        fun brother(): Node<T>? {
-            if (this == this.parent?.left)
-                return this.parent!!.right
-
-            return this.parent?.left
-        }
 
         fun rotateLeft() {
             val rightChild = this.right ?: return
@@ -180,12 +183,4 @@ class RedBlackTree<T : Comparable<T>> {
             }
         }
     }
-}
-
-fun main(args: Array<String>) {
-    val tree = RedBlackTree<Int>()
-    for (i in 1..7){
-        tree.insert(Random.nextInt(1, 123))
-    }
-    tree.orderedTraverse { str -> print("$str, ") }
 }

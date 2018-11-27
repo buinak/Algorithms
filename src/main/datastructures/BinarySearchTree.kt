@@ -27,7 +27,7 @@ class BinarySearchTree<T : Comparable<T>> {
         if (root == null) return else {
             val currentRoot = root as Node<T>
             if (currentRoot.contents == element) {
-                when (currentRoot.countChildren()){
+                when (currentRoot.countChildren()) {
                     0 -> root = null
                     1 -> root = if (currentRoot.left != null) currentRoot.left else currentRoot.right
                     2 -> {
@@ -96,6 +96,18 @@ class BinarySearchTree<T : Comparable<T>> {
         return currentLevel
     }
 
+
+    fun getMinimum(): T? {
+        val root: Node<T>? = root ?: return null
+        if (root!!.left == null) return root.contents
+
+        var currElement = root
+        while (currElement?.left != null) {
+            currElement = currElement.left
+        }
+
+        return currElement!!.contents
+    }
 
     inner class Node<T : Comparable<T>>(var contents: T) {
         var left: Node<T>? = null

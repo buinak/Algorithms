@@ -1,6 +1,7 @@
 package test.datastructures
 
 import main.datastructures.BinarySearchTree
+import main.datastructures.RedBlackTree
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -28,6 +29,23 @@ class BinarySearchTreeTest {
                 tree.insert(randomString)
             }
             stringList.forEach { assertTrue(tree.contains(it)) }
+        }
+    }
+
+    @Test
+    fun getMinimum() {
+        for (i in 1..TestConstants.AMOUNT_OF_TESTS){
+            var list = ArrayList<Int>()
+            var tree = BinarySearchTree<Int>()
+            for (i in 1..5000){
+                Random.nextInt(1, 1234567).run {
+                    if (tree.contains(this)) return@run
+                    tree.insert(this)
+                    list.add(this)
+                }
+            }
+            assertTrue(list == list.distinct())
+            assertEquals(list.min(), tree.getMinimum())
         }
     }
 
