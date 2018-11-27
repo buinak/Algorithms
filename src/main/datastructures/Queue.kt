@@ -92,7 +92,7 @@ class Queue<T> {
         var currElement: Node<T>? = head
         // Iterate through all elements of the queue until the right element is found
         while (currElement != null) if (currElement.contents == element) return true
-        else currElement = head?.nextNode
+        else currElement = currElement.nextNode
         // If was not found, return false.
         return false
     }

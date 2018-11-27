@@ -184,8 +184,8 @@ class RedBlackTree<T : Comparable<T>> {
 
 fun main(args: Array<String>) {
     val tree = RedBlackTree<Int>()
-    for (i in 1..30){
-        tree.insert(Random.nextInt(1, 12345))
+    for (i in 1..7){
+        tree.insert(Random.nextInt(1, 123))
     }
     tree.orderedTraverse { str -> print("$str, ") }
 }
