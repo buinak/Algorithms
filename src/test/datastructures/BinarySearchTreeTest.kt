@@ -19,10 +19,10 @@ class BinarySearchTreeTest {
     fun contains() {
         for (i in 1..TestConstants.AMOUNT_OF_TESTS) {
             val tree = BinarySearchTree<String>()
-            var stringList = ArrayList<String>()
+            val stringList = ArrayList<String>()
             for (j in 1..Random.nextInt(20, 100)) {
                 var randomString = ""
-                for (i in 1..Random.nextInt(2, 10)) {
+                for (k in 1..Random.nextInt(2, 10)) {
                     randomString += Random.nextInt(20, 100).toChar()
                 }
                 stringList.add(randomString)
@@ -35,9 +35,9 @@ class BinarySearchTreeTest {
     @Test
     fun getMinimum() {
         for (i in 1..TestConstants.AMOUNT_OF_TESTS){
-            var list = ArrayList<Int>()
-            var tree = BinarySearchTree<Int>()
-            for (i in 1..5000){
+            val list = ArrayList<Int>()
+            val tree = BinarySearchTree<Int>()
+            for (j in 1..5000){
                 Random.nextInt(1, 1234567).run {
                     if (tree.contains(this)) return@run
                     tree.insert(this)
@@ -93,7 +93,7 @@ class BinarySearchTreeTest {
             assertTrue(listBeforeDeletion.containsAll(sortedList))
             assertEquals(sortedList[0], listBeforeDeletion[0])
 
-            for (i in 1 until sortedList.size){
+            for (j in 1 until sortedList.size){
                 val randomElement = sortedList.shuffled().first()
                 tree.delete(randomElement)
                 sortedList.remove(randomElement)
@@ -122,9 +122,9 @@ class BinarySearchTreeTest {
             for (element in list.distinct()) {
                 tree.insert(element)
             }
-            var sortedInitialList = list.distinct().sorted()
-            var sortedTreeList = ArrayList<Int>()
-            tree.orderedTraverse({ element -> sortedTreeList.add(element) })
+            val sortedInitialList = list.distinct().sorted()
+            val sortedTreeList = ArrayList<Int>()
+            tree.orderedTraverse { element -> sortedTreeList.add(element) }
             assertEquals(sortedInitialList, sortedTreeList)
         }
     }
