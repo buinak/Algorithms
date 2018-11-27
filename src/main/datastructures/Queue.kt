@@ -50,6 +50,7 @@ class Queue<T> {
                 tail?.nextNode = this
                 tail = this
             }
+            // Increment the field necessary for the methods to work properly.
         }.also { size++ }
     }
 
@@ -68,10 +69,12 @@ class Queue<T> {
     fun dequeue(): T? {
         val result = head?.contents
         when (size) {
+            // If size is 0, return null from the method and don't decrement the size field.
             0 -> return null
             2 -> tail = null
         }
         head = head?.nextNode
+        // Decrement the size field, but only in case if the size is already bigger than 0.
         size--
         return result
     }
@@ -87,8 +90,10 @@ class Queue<T> {
      */
     fun contains(element: T): Boolean {
         var currElement: Node<T>? = head
+        // Iterate through all elements of the queue until the right element is found
         while (currElement != null) if (currElement.contents == element) return true
         else currElement = head?.nextNode
+        // If was not found, return false.
         return false
     }
 
@@ -103,6 +108,11 @@ class Queue<T> {
      */
     fun size() = size
 
+    /**
+     * This class represents a queue node, which has two fields:
+     *      contents: T for whatever the node contains inside it.
+     *      nextNode: Node<T>? for the next node added after the node.
+     */
     inner class Node<T>(val contents: T,
                         var nextNode: Node<T>? = null)
 }
