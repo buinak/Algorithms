@@ -1,13 +1,13 @@
 package main.datastructures
 
 /**
- * A basic Queue implementation using a linked list behind to link nodes.
+ * A basic Queue implementation using linked nodes.
  * A Queue is a data structure that implements the First In—First Out principle.
  *
  * Time complexity is O(1) for both enqueueing - putting an element of the
  * top of the queue and dequeueing—taking an element from the bottom of the queue.
  *
- * Using a linked list involves higher memory usage due to pointers but is very
+ * Using linked nodes involves higher memory usage due to pointers but is very
  * simple in implementation, which is its main advantage.
  *
  * Supports basic enqueue(), dequeue(), contains(), size() and isEmpty() methods.
@@ -86,7 +86,7 @@ class Queue<T> {
      *
      * contains() iterates through the queue until the current iterated element
      * is null. In this case it returns false.
-     * If it finds an element that equals to the parametre passed, it returns true.
+     * If it finds an element that equals to the parameter passed, it returns true.
      */
     fun contains(element: T): Boolean {
         var currElement: Node<T>? = head

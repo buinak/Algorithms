@@ -27,6 +27,21 @@ class StackTest {
     }
 
     @Test
+    fun contains() {
+        for (i in 1..TestConstants.AMOUNT_OF_TESTS) {
+            val newStack = Stack<Int>()
+            val list = ArrayList<Int>()
+            (1..Random.nextInt(1, 2000)).forEach {
+                Random.nextInt(1, 1234567).run {
+                    list.add(this)
+                    newStack.push(this)
+                }
+            }
+            list.forEach { assertTrue(newStack.contains(it)) }
+        }
+    }
+
+    @Test
     fun hasNext() {
         val stack = Stack<Int>()
         assertTrue(stack.isEmpty())

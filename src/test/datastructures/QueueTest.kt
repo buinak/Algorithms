@@ -1,9 +1,8 @@
 package test.datastructures
 
 import main.datastructures.Queue
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 import test.TestConstants
 import kotlin.random.Random
 
@@ -45,6 +44,21 @@ class QueueTest {
                 newQueue.dequeue()
             }
             assertEquals(numberOfElements, newQueue.size())
+        }
+    }
+
+    @Test
+    fun contains() {
+        for (i in 1..5) {
+            val newQueue = Queue<Int>()
+            val list = ArrayList<Int>()
+            (1..Random.nextInt(1, 5)).forEach {
+                Random.nextInt(1, 1234567).run {
+                    list.add(this)
+                    newQueue.enqueue(this)
+                }
+            }
+            list.forEach { assertTrue(newQueue.contains(it)) }
         }
     }
 }
