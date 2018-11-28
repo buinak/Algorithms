@@ -89,19 +89,6 @@ fun main(args: Array<String>) {
         println("-----------")
     }
 
-    //concurrent merge
-    if (sortArray[6]) {
-        println("CONCURRENT MERGE SORT sorting..")
-        var tmpArrayList = ArrayList(testList)
-        val threads = Runtime.getRuntime().availableProcessors()
-        val concurrentMergeTime = measureTimeMillis { concurrentMergeSort(tmpArrayList, threads) }.toInt()
-        sortingTimes.add(SortDataEntity("CONCURRENT MERGE", concurrentMergeTime))
-        val concurrentMergeSortList = ArrayList(testList)
-        concurrentMergeSort(concurrentMergeSortList, threads)
-        concurrentMergeSortList.checkSorted()
-        println("-----------")
-    }
-
     println("Sorting times, from fastest to slowest..")
     sortingTimes.sort()
     sortingTimes.forEach { println("Time to sort a list of ${testList.size} elements using ${it.sortName} = ${it.time} ms") }
