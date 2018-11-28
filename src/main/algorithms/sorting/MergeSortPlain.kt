@@ -1,6 +1,9 @@
 package main.algorithms.sorting
 
-fun <T : Comparable<T>> mergeSortPlain(list: MutableList<T>, start: Int = 0, end: Int = list.size - 1) {
+
+fun <T : Comparable<T>> mergeSortPlain(list: MutableList<T>) = mergeSortPlain(list, 0, list.size - 1)
+
+private fun <T : Comparable<T>> mergeSortPlain(list: MutableList<T>, start: Int, end: Int) {
     if (end > start) {
         val mid = (end + start) / 2
         mergeSortPlain(list, start, mid)
@@ -37,5 +40,4 @@ private fun <T : Comparable<T>> merge(list: MutableList<T>, start: Int, mid: Int
             return
         }
     }
-
 }

@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     }
 
     val sortingTimes = ArrayList<SortDataEntity>()
-    val sortArray = booleanArrayOf(true, true, true, true, true, true)
+    val sortArray = booleanArrayOf(true, true, true, true, true, true, true)
 
     //bubble sort
     if (sortArray[0]) {
@@ -86,6 +86,19 @@ fun main(args: Array<String>) {
         val mergeInsertionSort = ArrayList(testList)
         mergeInsertionSort(mergeInsertionSort, insertionThreshold = threshold)
         mergeInsertionSort.checkSorted()
+        println("-----------")
+    }
+
+    //concurrent merge
+    if (sortArray[6]) {
+        println("CONCURRENT MERGE SORT sorting..")
+        var tmpArrayList = ArrayList(testList)
+        val threads = Runtime.getRuntime().availableProcessors()
+        val concurrentMergeTime = measureTimeMillis { concurrentMergeSort(tmpArrayList, threads) }.toInt()
+        sortingTimes.add(SortDataEntity("CONCURRENT MERGE", concurrentMergeTime))
+        val concurrentMergeSortList = ArrayList(testList)
+        concurrentMergeSort(concurrentMergeSortList, threads)
+        concurrentMergeSortList.checkSorted()
         println("-----------")
     }
 

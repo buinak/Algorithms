@@ -14,7 +14,9 @@ package main.algorithms.sorting
  * @author Konstantin Buinak (https://github.com/buinak)
  */
 
-fun mergeSortSentinel(list: MutableList<Int>, start: Int = 0, end: Int = list.size - 1) {
+fun mergeSortSentinel(list: MutableList<Int>) = mergeSortSentinel(list, 0, list.size - 1)
+
+private fun mergeSortSentinel(list: MutableList<Int>, start: Int, end: Int) {
     if (end > start) {
         val mid = (end + start) / 2
         mergeSortSentinel(list, start, mid)

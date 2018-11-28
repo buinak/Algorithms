@@ -6,7 +6,11 @@ import kotlin.collections.ArrayList
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
-fun mergeInsertionSort(list: MutableList<Int>, start: Int = 0, end: Int = list.size - 1, insertionThreshold: Int = 8) {
+fun mergeInsertionSort(list: MutableList<Int>, insertionThreshold: Int = 8){
+    mergeInsertionSort(list, 0, list.size - 1, insertionThreshold)
+}
+
+private fun mergeInsertionSort(list: MutableList<Int>, start: Int, end: Int, insertionThreshold: Int = 8) {
     if (end > start) {
         if ((end - start) > insertionThreshold) {
             val mid = (end + start) / 2
