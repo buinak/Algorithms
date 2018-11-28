@@ -4,7 +4,9 @@ import main.utils.swap
 
 /**
  * Bubble sort, also sometimes referred to as Sinking sort, is a rather simple algorithms.sorting algorithm.
- * Principle: iteratively go through the list and swap adjacent elements which are not placed in the correct order.
+ * Principle:
+ *      Iteratively go through the list and swap adjacent elements which are not placed in the correct order.
+ *      If there were no swaps, stop iterating.
  *
  *
  * Despite the advantages of simplicity, the average time complexity of O(n^2) makes the algorithm impractical for usage

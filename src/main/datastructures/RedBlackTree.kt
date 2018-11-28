@@ -1,7 +1,5 @@
 package main.datastructures
 
-import kotlin.random.Random
-
 class RedBlackTree<T : Comparable<T>> {
 
     private var root: Node<T>? = null
@@ -23,14 +21,14 @@ class RedBlackTree<T : Comparable<T>> {
         }
         if (element < father.contents) {
             father.left = Node(element, father, false)
-            insertFixup(father.left)
+            postInsertionFix(father.left)
         } else {
             father.right = Node(element, father, false)
-            insertFixup(father.right)
+            postInsertionFix(father.right)
         }
     }
 
-    private fun insertFixup(node: Node<T>?) {
+    private fun postInsertionFix(node: Node<T>?) {
         var uncle: Node<T>?
         var current: Node<T>? = node
 

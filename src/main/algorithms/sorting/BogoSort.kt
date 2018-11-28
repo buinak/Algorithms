@@ -1,7 +1,13 @@
 package main.algorithms.sorting
 
 /**
- * Very inefficient. O((n+1)!)
+ * Bogo sort is a very inefficient sorting algorithm.
+ * Principle:
+ *      Shuffle the list until it is sorted.
+ *
+ * Time complexity: O((n+1)!) on average.
+ * Space complexity:
+ *
  *
  * @author Konstantin Buinak (https://github.com/buinak)
  */
