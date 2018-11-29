@@ -12,6 +12,12 @@ package main.datastructures
  * Furthermore, using linked nodes means improved time complexity - the O(1) time
  * complexity for pushing would be amortized due to having to re-create the array
  * in case if the array behind it is not sufficient to fit in an extra element.
+ *
+ * Time complexity:
+ *      O(1) push()
+ *      O(1) pop()
+ *      O(n) contains()
+ *      Thus making it a very efficient data structure.
  */
 class Stack<T> {
     // The head of the stack is the element of top of it. It is the first to be popped.

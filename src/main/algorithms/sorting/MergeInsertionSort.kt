@@ -6,6 +6,19 @@ import kotlin.collections.ArrayList
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
+/**
+ * Merge-Insertion sort is a sorting algorithm using the principle that for
+ * smaller sets of data, insertion sort is more efficient than merge sort.
+ * It uses a threshold. If the list's size is below the threshold, insertion sort will be used.
+ *
+ * Principle:
+ *      Use insertion sort for smaller lists below the threshold size, otherwise
+ *      use merge sort.
+ *
+ * Time complexity: O(n log n) on average.
+ *
+ * Space complexity: O(n) auxiliary for merging.
+ */
 fun mergeInsertionSort(list: MutableList<Int>, insertionThreshold: Int = 8){
     mergeInsertionSort(list, 0, list.size - 1, insertionThreshold)
 }

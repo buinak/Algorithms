@@ -1,6 +1,19 @@
 package main.algorithms.sorting
 
-
+/**
+ * Merge sort is an efficient algorithm for sorting lists of data.
+ * Principle:
+ *      Split the list in half until it is only 2 elements long, then sort those lists.
+ *      After sorting those small lists, start merging them together.
+ *      For instance, having 1 3 and 2 5, by merging we would get 1 2 3 5.
+ *
+ *
+ * Time complexity: O(n log n) in all cases.
+ *      Due to that, quicksort usually performs better on average due to its best case
+ *      O(n) time complexity.
+ *
+ * Space complexity: O(n) auxiliary.
+ */
 fun <T : Comparable<T>> mergeSortPlain(list: MutableList<T>) = mergeSortPlain(list, 0, list.size - 1)
 
 private fun <T : Comparable<T>> mergeSortPlain(list: MutableList<T>, start: Int, end: Int) {

@@ -1,11 +1,11 @@
 package test.datastructures
 
 import main.datastructures.LinkedList
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import test.TestConstants.AMOUNT_OF_TESTS
 import kotlin.random.Random
+import kotlin.test.assertTrue
 
 class LinkedListTest {
 
@@ -21,6 +21,24 @@ class LinkedListTest {
                 standardList.add(randomElement)
             }
             standardList.forEachIndexed { index, element -> assertEquals(element, linkedList.get(index)) }
+        }
+    }
+
+    @Test
+    fun containsShouldWork() {
+        for (i in 1..AMOUNT_OF_TESTS) {
+            val list = ArrayList<Int>()
+            val linked = LinkedList<Int>()
+            for (j in 1..Random.nextInt(20, 1000)) {
+                Random.nextInt(1, 1234567).run {
+                    if (!list.contains(this)) {
+                        list.add(this)
+                        linked.add(this)
+                    }
+                }
+            }
+            println()
+            list.forEach { assertTrue { linked.contains(it) } }
         }
     }
 

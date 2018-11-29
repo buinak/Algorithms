@@ -1,10 +1,22 @@
 package main.datastructures
 
-import java.lang.Exception
-
 /**
- * Singly-linked list of elements.
+ * A Linked list is a data structure in which every element in the list stores a pointer
+ * to the next element of the list.
+ * This allows the list to be truly dynamic* at the cost of extra memory.
+ *
+ *
+ * Time complexity:
+ *      O(1) add()
+ *      O(n) get()
+ *      O(n) contains()
+ *
+ * This implementation is a singly-linked list of elements.
  * Supports add(), get(i), and size()
+ *
+ *
+ * * Array lists, despite having O(1) adding, sometimes have to re-size themselves and re-add
+ *      all the elements, thus making the performance worse.
  *
  * @author Konstantin Buinak (https://github.com/buinak)
  */
@@ -42,6 +54,17 @@ class LinkedList<T> {
             println()
         }
         return currNode.contents
+    }
+
+    fun contains(element: T): Boolean {
+        if (!::head.isInitialized) return false
+        if (head.contents == element) return true
+
+        var currElement: Node<T>? = head
+        while (currElement != null) if (currElement.nextNode?.contents == element) {
+            return true
+        } else currElement = currElement.nextNode
+        return false
     }
 
     fun size() = length
