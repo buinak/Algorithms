@@ -9,12 +9,12 @@ import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     var testList = ArrayList<Int>()
-    for (i in 1..10000) {
+    for (i in 1..100000) {
         testList.add(Random.nextInt(0, 100000100))
     }
 
     val sortingTimes = ArrayList<SortDataEntity>()
-    val sortArray = booleanArrayOf(true, true, true, true, true, true, true)
+    val sortArray = booleanArrayOf(false, false, false, true, true, true, true, true)
 
     //bubble sort
     if (sortArray[0]) {
@@ -54,10 +54,10 @@ fun main(args: Array<String>) {
 
     //merge sort
     if (sortArray[3]) {
-        println("MERGE SORT sorting..")
+        println("SENTINEL MERGE SORT sorting..")
         var tmpArrayList = ArrayList(testList)
         val mergeTime = measureTimeMillis { mergeSortSentinel(tmpArrayList) }.toInt()
-        sortingTimes.add(SortDataEntity("MERGE SORT", mergeTime))
+        sortingTimes.add(SortDataEntity("SENTINEL MERGE SORT", mergeTime))
         val mergeSortedList = ArrayList(testList)
         mergeSortSentinel(mergeSortedList)
         mergeSortedList.checkSorted()
@@ -89,6 +89,30 @@ fun main(args: Array<String>) {
         println("-----------")
     }
 
+    //heap
+    if (sortArray[6]) {
+        println("HEAP SORT sorting..")
+        var tmpArrayList = ArrayList(testList)
+        val heapTime = measureTimeMillis { heapSort(tmpArrayList) }.toInt()
+        sortingTimes.add(SortDataEntity("HEAP", heapTime))
+        val heapSort = ArrayList(testList)
+        heapSort(heapSort)
+        heapSort.checkSorted()
+        println("-----------")
+    }
+
+    //merge-plain
+    if (sortArray[7]) {
+        println("PLAIN MERGE SORT sorting..")
+        var tmpArrayList = ArrayList(testList)
+        val mergeTime = measureTimeMillis { mergeSortPlain(tmpArrayList) }.toInt()
+        sortingTimes.add(SortDataEntity("PLAIN MERGE SORT", mergeTime))
+        val mergeSortedList = ArrayList(testList)
+        mergeSortPlain(mergeSortedList)
+        mergeSortedList.checkSorted()
+        println("-----------")
+    }
+
     println("Sorting times, from fastest to slowest..")
     sortingTimes.sort()
     sortingTimes.forEach { println("Time to sort a list of ${testList.size} elements using ${it.sortName} = ${it.time} ms") }
@@ -96,7 +120,7 @@ fun main(args: Array<String>) {
     readLine()
 }
 
-data class SortDataEntity(val sortName: String, val time: Int) : Comparable<SortDataEntity> {
+data class SortDataEntity(val sortName: String, var time: Int) : Comparable<SortDataEntity> {
     override fun compareTo(other: SortDataEntity): Int {
         return when {
             other.time > time -> -1
