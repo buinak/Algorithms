@@ -13,11 +13,10 @@ package main.algorithms.sorting
  */
 fun <T: Comparable<T>> bogoSort(list: MutableList<T>) {
     fun isSorted(list: List<T>): Boolean {
-        var sorted = true
         for (i in 1 until list.size) {
-            if (list[i - 1] > list[i]) sorted = false
+            if (list[i - 1] > list[i]) return false
         }
-        return sorted
+        return true
     }
 
     while (!isSorted(list)) {
