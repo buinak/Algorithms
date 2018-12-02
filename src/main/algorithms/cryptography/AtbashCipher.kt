@@ -1,6 +1,6 @@
 package main.algorithms.cryptography
 
-object AtbashCipher {
+fun atbashEncrypt(text: String): String{
     val alphabet = listOf(
         'a', 'b', 'c', 'd', 'e',
         'f', 'g', 'h', 'i', 'j',
@@ -8,18 +8,14 @@ object AtbashCipher {
         'p', 'q', 'r', 's', 't',
         'u', 'v', 'w', 'x', 'y',
         'z')
-
     val reversedAlphabet = alphabet.reversed()
-}
 
-fun atbashEncrypt(text: String): String{
     var resultString = ""
     text.forEach {character ->
-        val isUpperCase = character.isUpperCase()
-        if (!AtbashCipher.alphabet.contains(character.toLowerCase())) resultString += character
+        if (!alphabet.contains(character.toLowerCase())) resultString += character
         else {
-            var newChar = AtbashCipher.reversedAlphabet[AtbashCipher.alphabet.indexOf(character.toLowerCase())]
-            if (isUpperCase) newChar = newChar.toUpperCase()
+            var newChar = reversedAlphabet[alphabet.indexOf(character.toLowerCase())]
+            if (character.isUpperCase()) newChar = newChar.toUpperCase()
             resultString += newChar
         }
     }
@@ -27,13 +23,21 @@ fun atbashEncrypt(text: String): String{
 }
 
 fun atbashDecrypt(text: String): String{
+    val alphabet = listOf(
+        'a', 'b', 'c', 'd', 'e',
+        'f', 'g', 'h', 'i', 'j',
+        'k', 'l', 'm', 'n', 'o',
+        'p', 'q', 'r', 's', 't',
+        'u', 'v', 'w', 'x', 'y',
+        'z')
+    val reversedAlphabet = alphabet.reversed()
+
     var resultString = ""
     text.forEach {character ->
-        val isUpperCase = character.isUpperCase()
-        if (!AtbashCipher.alphabet.contains(character.toLowerCase())) resultString += character
+        if (!alphabet.contains(character.toLowerCase())) resultString += character
         else {
-            var newChar = AtbashCipher.alphabet[AtbashCipher.reversedAlphabet.indexOf(character.toLowerCase())]
-            if (isUpperCase) newChar = newChar.toUpperCase()
+            var newChar = alphabet[reversedAlphabet.indexOf(character.toLowerCase())]
+            if (character.isUpperCase()) newChar = newChar.toUpperCase()
             resultString += newChar
         }
     }
