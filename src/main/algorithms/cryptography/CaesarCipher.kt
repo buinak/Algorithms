@@ -9,7 +9,7 @@ fun caesarEncrypt(text: String, shift: Int): String{
         'u', 'v', 'w', 'x', 'y',
         'z')
 
-    var moduledShift = shift % alphabet.size
+    val moduledShift = shift % alphabet.size
     if (moduledShift == 0) return text
 
     var resultString = ""

@@ -1,5 +1,7 @@
 package main.algorithms.cryptography
 
+import kotlin.random.Random
+
 fun vigenereEncrypt(text: String, key: String): String{
     val alphabet = listOf(
         'a', 'b', 'c', 'd', 'e',
@@ -69,4 +71,32 @@ fun vigenereDecrypt(text: String, key: String): String {
     }
 
     return resultString
+}
+
+/**
+ * Encrypts using randomly generated keys for every 2 characters of the input string.
+ * Outputs a pair where the first element is the encrypted output and the second element is the random key.
+ *
+ * This imitates the so-called One Time Pad, which was proven to be cryptographically unbreakable given its proper usage.
+  */
+fun vigenereSecurelyEncrypt(text: String): Pair<String, String> {
+    val parts = text.chunked(2)
+    var result = ""
+    var key = ""
+    for (part in parts){
+        var randomKey = ""
+        while (randomKey.length != part.length) randomKey += Random.nextInt(97, 122).toChar()
+        key += randomKey
+        result += vigenereEncrypt(part, randomKey)
+    }
+    return Pair(result, key)
+}
+
+fun main(args: Array<String>) {
+    println("Enter text for encryption!")
+    var input = readLine()!!
+    while (input.isEmpty()) input = readLine()!!
+    println("Initial = $input")
+    val pair = vigenereSecurelyEncrypt(input)
+    println("Result = ${pair.first} \n Key = ${pair.second}")
 }
