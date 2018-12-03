@@ -74,13 +74,20 @@ fun vigenereDecrypt(text: String, key: String): String {
 }
 
 /**
- * Encrypts using randomly generated keys for every 2 characters of the input string.
+ * Encrypts using randomly generated keys for every N characters of the input string.
  * Outputs a pair where the first element is the encrypted output and the second element is the random key.
  *
  * This imitates the so-called One Time Pad, which was proven to be cryptographically unbreakable given its proper usage.
   */
-fun vigenereSecurelyEncrypt(text: String): Pair<String, String> {
-    val parts = text.chunked(2)
+fun vigenereSecurelyEncrypt(text: String, keyLength: Int = 2): Pair<String, String> {
+    if (keyLength < 2 || keyLength > (text.length / 2)) return Pair(text, "INSECURE KEY LENGTH")
+    val fixedKeyLength = when {
+        keyLength > text.length -> text.length
+        keyLength < 2 -> 2
+        else -> keyLength
+    }
+
+    val parts = text.chunked(fixedKeyLength)
     var result = ""
     var key = ""
     for (part in parts){
@@ -97,6 +104,6 @@ fun main(args: Array<String>) {
     var input = readLine()!!
     while (input.isEmpty()) input = readLine()!!
     println("Initial = $input")
-    val pair = vigenereSecurelyEncrypt(input)
+    val pair = vigenereSecurelyEncrypt(input, 6)
     println("Result = ${pair.first} \n Key = ${pair.second}")
 }
