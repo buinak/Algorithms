@@ -100,7 +100,7 @@ fun main(args: Array<String>) {
         heapSort.checkSorted()
         println("-----------")
     }
-
+    
     //merge-plain
     if (sortArray[7]) {
         println("PLAIN MERGE SORT sorting..")

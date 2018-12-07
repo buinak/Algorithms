@@ -1,23 +1,17 @@
 package main.algorithms.problems
 
-fun findAllSolutions(size: Int): List<Chessboard> = recursivelyFindSolutions(Chessboard(size))
-
-fun recursivelyFindSolutions(chessBoard: Chessboard, currentRow: Int = 0): List<Chessboard> {
-    val list: ArrayList<Chessboard> = ArrayList()
-    for (i in 0 until chessBoard.dimension){
+fun recursivelyFindSolutionsAndPrint(chessBoard: Chessboard, currentRow: Int = 0) {
+    for (i in 0 until chessBoard.dimension) {
         val newChessBoard = Chessboard(chessBoard.dimension)
         newChessBoard.copyBoard(chessBoard)
         newChessBoard.putQueen(currentRow, i)
-        if (newChessBoard.isSafe()) list.add(newChessBoard)
-    }
-
-    if (currentRow == (chessBoard.dimension - 1)) return list
-    else {
-        val result = ArrayList<Chessboard>()
-        for (safeChessBoard in list){
-            result.addAll(recursivelyFindSolutions(safeChessBoard, currentRow + 1))
+        if (newChessBoard.isSafe()) {
+            if (currentRow != (chessBoard.dimension - 1)) {
+                recursivelyFindSolutionsAndPrint(newChessBoard, currentRow + 1)
+            } else {
+                newChessBoard.printBoard()
+            }
         }
-        return result
     }
 }
 
