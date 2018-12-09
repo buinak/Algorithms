@@ -1,6 +1,28 @@
 package main.algorithms.problems
 
-fun recursivelyFindSolutionsAndPrint(chessBoard: Chessboard, currentRow: Int = 0) {
+fun solveQueensProblem(size: Int) {
+    recursivelyFindSolutionsAndPrint(Chessboard(size))
+}
+fun solveQueensProblem(size: Int, f: (Chessboard) -> Unit){
+    recursivelyFindSolutionsAndPrint(Chessboard(size), 0, f)
+}
+
+private fun recursivelyFindSolutionsAndPrint(chessBoard: Chessboard, currentRow: Int = 0, f: (Chessboard) -> Unit) {
+    for (i in 0 until chessBoard.dimension) {
+        val newChessBoard = Chessboard(chessBoard.dimension)
+        newChessBoard.copyBoard(chessBoard)
+        newChessBoard.putQueen(currentRow, i)
+        if (newChessBoard.isSafe()) {
+            if (currentRow != (chessBoard.dimension - 1)) {
+                recursivelyFindSolutionsAndPrint(newChessBoard, currentRow + 1, f)
+            } else {
+                f(newChessBoard)
+            }
+        }
+    }
+}
+
+private fun recursivelyFindSolutionsAndPrint(chessBoard: Chessboard, currentRow: Int = 0) {
     for (i in 0 until chessBoard.dimension) {
         val newChessBoard = Chessboard(chessBoard.dimension)
         newChessBoard.copyBoard(chessBoard)
