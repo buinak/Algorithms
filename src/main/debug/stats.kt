@@ -1,10 +1,8 @@
-package main
+package main.debug
 
 import main.algorithms.sorting.mergeInsertionSort
 import main.algorithms.sorting.mergeSortPlain
 import main.algorithms.sorting.mergeSortSentinel
-import test.TestConstants
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
@@ -21,12 +19,13 @@ fun main(args: Array<String>) {
     statsMap.add(mergeInsertionSortData)
     statsMap.add(quickSort)
     statsMap.add(heapSort)
-    var n = 250000
-    var times = 20
+    var n = 1000000
+    var times = 50
+    var i = 1
     for (i in 1..times){
         println("$i out of ${times} done")
         var list = ArrayList<Int>()
-        for (j in 1..n) list.add(Random.nextInt(1, 1234567890))
+        for (j in 1..Random.nextInt(100000, n)) list.add(Random.nextInt(1, 1234567890))
         var plainList = ArrayList<Int>(list)
         var sentList = ArrayList<Int>(list)
         var inseList = ArrayList<Int>(list)

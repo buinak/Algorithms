@@ -1,4 +1,4 @@
-package test.searching
+package test.algorithms.searching
 
 import main.algorithms.searching.binarySearch
 import main.algorithms.searching.plainSearch

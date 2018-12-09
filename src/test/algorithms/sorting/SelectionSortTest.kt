@@ -1,4 +1,4 @@
-package test.sorting
+package test.algorithms.sorting
 
 import org.junit.Test
 

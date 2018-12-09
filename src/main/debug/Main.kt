@@ -1,4 +1,4 @@
-package main
+package main.debug
 
 import main.algorithms.sorting.*
 import main.utils.checkSorted
@@ -9,7 +9,7 @@ import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     var testList = ArrayList<Int>()
-    for (i in 1..100000) {
+    for (i in 1..400000) {
         testList.add(Random.nextInt(0, 100000100))
     }
 
@@ -130,7 +130,7 @@ data class SortDataEntity(val sortName: String, var time: Int) : Comparable<Sort
     }
 
 //    override fun toString(): String {
-//        return "main.SortDataEntity(sortName='$sortName', time=$time)"
+//        return "main.debug.SortDataEntity(sortName='$sortName', time=$time)"
 //    }
 
 

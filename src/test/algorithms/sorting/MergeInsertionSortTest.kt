@@ -1,4 +1,4 @@
-package test.sorting
+package test.algorithms.sorting
 
 import main.algorithms.sorting.mergeInsertionSort
 import main.utils.generateRandomList

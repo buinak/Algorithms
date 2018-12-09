@@ -1,10 +1,12 @@
-package main.algorithms.cryptography
+package test.algorithms.cryptography
 
+import main.algorithms.cryptography.atbashDecrypt
+import main.algorithms.cryptography.atbashEncrypt
 import org.junit.Test
 
 import org.junit.Assert.*
 
-class AtbashCipherKtTest {
+class AtbashCipherTest {
 
     @Test
     fun atbashCipher() {

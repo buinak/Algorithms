@@ -1,6 +1,6 @@
 package main.algorithms.sorting
 
-import main.SortDataEntity
+import main.debug.SortDataEntity
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.random.Random
@@ -104,7 +104,12 @@ fun main(args: Array<String>) {
     val list = ArrayList<SortDataEntity>()
     println("Average time per sort in milliseconds (ms): ")
     for (entry in averageInsertionMap) {
-        list.add(SortDataEntity("InsertionMergeSort with Threshold ${entry.key}", ((entry.value / n).toInt())))
+        list.add(
+            SortDataEntity(
+                "InsertionMergeSort with Threshold ${entry.key}",
+                ((entry.value / n).toInt())
+            )
+        )
     }
     list.add(SortDataEntity("SentinelMergeSort", averageSentinel.toInt()))
     list.add(SortDataEntity("PlainMergeSort", averagePlain.toInt()))
