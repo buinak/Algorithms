@@ -1,101 +1,77 @@
 package main.algorithms.problems
 
-fun solveQueensProblem(size: Int) {
-    recursivelyFindSolutionsAndPrint(Chessboard(size))
-}
-fun solveQueensProblem(size: Int, f: (Chessboard) -> Unit){
-    recursivelyFindSolutionsAndPrint(Chessboard(size), 0, f)
-}
+class Chessboard {
 
-private fun recursivelyFindSolutionsAndPrint(chessBoard: Chessboard, currentRow: Int = 0, f: (Chessboard) -> Unit) {
-    for (i in 0 until chessBoard.dimension) {
-        val newChessBoard = Chessboard(chessBoard.dimension)
-        newChessBoard.copyBoard(chessBoard)
-        newChessBoard.putQueen(currentRow, i)
-        if (newChessBoard.isSafe()) {
-            if (currentRow != (chessBoard.dimension - 1)) {
-                recursivelyFindSolutionsAndPrint(newChessBoard, currentRow + 1, f)
-            } else {
-                f(newChessBoard)
-            }
-        }
-    }
-}
+    val board = ArrayList<ArrayList<Int>>()
 
-private fun recursivelyFindSolutionsAndPrint(chessBoard: Chessboard, currentRow: Int = 0) {
-    for (i in 0 until chessBoard.dimension) {
-        val newChessBoard = Chessboard(chessBoard.dimension)
-        newChessBoard.copyBoard(chessBoard)
-        newChessBoard.putQueen(currentRow, i)
-        if (newChessBoard.isSafe()) {
-            if (currentRow != (chessBoard.dimension - 1)) {
-                recursivelyFindSolutionsAndPrint(newChessBoard, currentRow + 1)
-            } else {
-                newChessBoard.printBoard()
-            }
-        }
-    }
-}
-
-class Chessboard(val dimension: Int) {
-    private val board = ArrayList<ArrayList<Int>>()
-
-    init {
-        for (i in 1..dimension) {
+    constructor(size: Int) {
+        for (i in 1..size) {
             val newList = ArrayList<Int>()
-            for (j in 1..dimension) {
+            for (j in 1..size) {
                 newList.add(0)
             }
             board.add(newList)
         }
     }
 
-    fun copyBoard(chessboard: Chessboard) {
-        for (i in 0 until chessboard.dimension){
-            if (chessboard.board[i].contains(1)) {
-                val column = chessboard.board[i].indexOf(1)
-                board[i][column] = 1
+    constructor(chessboard: Chessboard) {
+        for (i in 0 until chessboard.board.size) {
+            val newList = ArrayList<Int>()
+            for (j in 0 until chessboard.board.size) {
+                newList.add(0)
+            }
+            board.add(newList)
+        }
+
+        for (i in 0 until chessboard.board.size) {
+            for (j in 0 until chessboard.board.size) {
+                board[i][j] = chessboard.board[i][j]
             }
         }
     }
+}
 
-    fun putQueen(row: Int, column: Int) {
-        if (row > dimension || column > dimension) return
-        board[row][column] = 1
+fun solveEightQueensProblem(size: Int): List<Chessboard> = eightQueensProblem(Chessboard(size), 0, ArrayList())
+
+private fun isBoardSafe(chessboard: Chessboard): Boolean {
+    for (i in 0 until chessboard.board.size) {
+        if (!chessboard.board[i].contains(1)) continue
+        val column = chessboard.board[i].indexOf(1)
+        for (j in i + 1 until chessboard.board.size) {
+            if (!chessboard.board[j].contains(1)) continue
+            val columnSecond = chessboard.board[j].indexOf(1)
+            if (column == columnSecond) return false
+            if (Math.abs(column - columnSecond) == Math.abs(i - j)) return false
+        }
     }
+    return true
+}
 
-    fun isSafe(): Boolean {
-        for (i in 0 until board.size) {
-            val row = board[i]
-            if (row.contains(1)) {
-                if (row.count { it == 1 } > 1) return false
-                val columnNumber = row.indexOf(1)
-                val rowNumber = board.indexOf(row)
-                //collision check
-                for (j in 0 until board.size) {
-                    if (j == i) continue
-                    if (!board[j].contains(1)) continue
-                    val columnNumberQueen = board[j].indexOf(1)
-                    //if the column matches
-                    if (columnNumber == columnNumberQueen) return false
-                    //check for diagonal collisions
-                    if (Math.abs(j - i) == Math.abs(columnNumber - columnNumberQueen)) return false
-                }
+private fun eightQueensProblem(
+    chessboard: Chessboard,
+    currentRow: Int,
+    solutions: ArrayList<Chessboard>
+): List<Chessboard> {
+    for (i in 0 until chessboard.board.size){
+        chessboard.board[currentRow][i] = 1
+        if (isBoardSafe(chessboard)) {
+            if (currentRow == chessboard.board.size - 1){
+                solutions.add(Chessboard(chessboard))
+            } else {
+                eightQueensProblem(chessboard, currentRow + 1, solutions)
             }
         }
-        return true
+        chessboard.board[currentRow][i] = 0
     }
+    return solutions
+}
 
-    fun printBoard() {
+fun main(args: Array<String>) {
+    solveEightQueensProblem(5).forEach {
         println()
-        for (row in board){
-            var rowString = "{ "
-            for (element in row){
-                rowString += "$element "
-            }
-            rowString += "}"
-            println(rowString)
+        it.board.forEach { row ->
+            println()
+            row.forEach { number -> print("$number ") }
         }
-        println()
     }
 }
