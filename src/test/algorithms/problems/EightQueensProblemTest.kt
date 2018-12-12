@@ -1,6 +1,6 @@
 package test.algorithms.problems
 
-import main.algorithms.problems.solveQueensProblem
+import main.algorithms.problems.solveEightQueensProblem
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -21,9 +21,7 @@ class EightQueensProblemTest {
         map[9] = 352
         map[10] = 724
         for (entry in map.entries){
-            var i = 0
-            solveQueensProblem(entry.key) { i++ }
-            assertEquals(entry.value, i)
+            assertEquals(solveEightQueensProblem(entry.key).size, entry.value)
         }
     }
 }
