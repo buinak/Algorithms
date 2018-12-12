@@ -1,13 +1,45 @@
 package main.algorithms.mathematics
 
 
-fun areCoprime(first: Long, second: Long): Boolean{
-    val smaller = if (first <= second) first else second
-    val other = if (first > second) first else second
-    for (i in 2..Math.sqrt(smaller.toDouble()).toInt()){
-        if (smaller % i == 0L && other % i == 0L) return false
+fun areCoprime(first: Long, second: Long): Boolean {
+    fun greatestCommonDivisor(first: Long, second: Long): Long {
+        var smaller = if (first <= second) first else second
+        var bigger = if (first > second) first else second
+
+        return if (bigger % smaller == 0L) smaller
+        else greatestCommonDivisor(smaller, bigger % smaller)
     }
-    return true
+
+    return greatestCommonDivisor(first, second) == 1L
+}
+
+fun returnAllCoprimes(number: Long, limit: Long = number): List<Long> {
+    val result = ArrayList<Long>()
+    for (i in 1..limit) if (areCoprime(number, i)) result.add(i)
+    return result
+}
+
+fun returnClosestCoprimes(number: Long, amount: Int, increment: Boolean = false): List<Long> {
+    val result = ArrayList<Long>()
+    when (increment) {
+        true -> {
+            var i = number
+            while (true) {
+                if (areCoprime(number, ++i)) {
+                    result.add(i)
+                    if (result.size == amount) break
+                }
+            }
+        }
+        false -> {
+            for (i in (number - 1) downTo 1) if (areCoprime(number, i)) {
+                result.add(i)
+                if (result.size == amount) break
+            }
+        }
+    }
+
+    return result
 }
 
 fun isPrime(num: Long): Boolean {
@@ -48,8 +80,4 @@ fun getAllPrimesPlain(limit: Int): List<Int> {
     val result = ArrayList<Int>()
     for (i in 2..limit) if (isPrime(i.toLong())) result.add(i)
     return result
-}
-
-fun main(args: Array<String>) {
-    for (i in 1..30) if (areCoprime(i.toLong(), 24L)) println(i)
 }
