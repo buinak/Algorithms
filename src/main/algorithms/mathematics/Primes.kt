@@ -1,6 +1,14 @@
 package main.algorithms.mathematics
 
-import kotlin.system.measureTimeMillis
+
+fun areCoprime(first: Long, second: Long): Boolean{
+    val smaller = if (first <= second) first else second
+    val other = if (first > second) first else second
+    for (i in 2..Math.sqrt(smaller.toDouble()).toInt()){
+        if (smaller % i == 0L && other % i == 0L) return false
+    }
+    return true
+}
 
 fun isPrime(num: Long): Boolean {
     if (num < 1) return false
@@ -40,4 +48,8 @@ fun getAllPrimesPlain(limit: Int): List<Int> {
     val result = ArrayList<Int>()
     for (i in 2..limit) if (isPrime(i.toLong())) result.add(i)
     return result
+}
+
+fun main(args: Array<String>) {
+    for (i in 1..30) if (areCoprime(i.toLong(), 24L)) println(i)
 }
