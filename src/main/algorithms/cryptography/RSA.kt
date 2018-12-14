@@ -1,18 +1,16 @@
 package main.algorithms.cryptography
 
 import main.algorithms.mathematics.areCoprime
-import main.algorithms.mathematics.isPrime
-import main.algorithms.mathematics.raiseToPower
+import main.algorithms.mathematics.generateRandomPrime
 import main.algorithms.mathematics.raiseToPowerBig
 import java.math.BigInteger
 import kotlin.random.Random
 
 private fun generateRandomPrimePair(range: IntRange): Pair<Int, Int> {
-    var num = Random.nextInt(range.first, range.endInclusive)
-    while (!isPrime(num.toLong())) num = Random.nextInt(range.first, range.endInclusive)
-    var num2 = Random.nextInt(range.first, range.endInclusive)
-    while (!isPrime(num2.toLong())) num2 = Random.nextInt(range.first, range.endInclusive)
-    return Pair(num, num2)
+    var num1 = generateRandomPrime(range)
+    var num2 = generateRandomPrime(range)
+    while (num2 == num1) num2 = generateRandomPrime(range)
+    return Pair(num1, num2)
 }
 
 private fun generateRandomCoprime(range: IntRange, number: Int): Int {
@@ -21,7 +19,7 @@ private fun generateRandomCoprime(range: IntRange, number: Int): Int {
     }
 }
 
-private fun generateRandomKeys(primeRange: IntRange): Pair<RSAPublicKey, RSAPrivateKey> {
+fun generateRandomKeys(primeRange: IntRange): Pair<RSAPublicKey, RSAPrivateKey> {
     fun generateE(intRange: IntRange, n: Int, phi: Int): Int{
         for (i in intRange){
             if (areCoprime(i.toLong(), n.toLong()) && areCoprime(i.toLong(), phi.toLong())) return i
@@ -46,24 +44,14 @@ private fun generateRandomKeys(primeRange: IntRange): Pair<RSAPublicKey, RSAPriv
     return Pair(public, private)
 }
 
-private fun rsaEncrypt(message: Int, publicKey: RSAPublicKey): Long {
+fun rsaEncrypt(message: Int, publicKey: RSAPublicKey): Long {
     return (raiseToPowerBig(message.toLong(), publicKey.exponent).mod(BigInteger.valueOf(publicKey.modulus.toLong())).toLong())
 }
 
-private fun rsaDecrypt(message: Int, privateKey: RSAPrivateKey): Long {
-    val power = raiseToPowerBig(message.toLong(), privateKey.d)
+fun rsaDecrypt(message: Long, privateKey: RSAPrivateKey): Long {
+    val power = raiseToPowerBig(message, privateKey.d)
     return (power % BigInteger.valueOf(privateKey.modulus.toLong())).toLong()
 }
 
 class RSAPublicKey(val modulus: Int, val exponent: Int)
 class RSAPrivateKey(val modulus: Int, val d: Int)
-
-fun main() {
-    val pair = generateRandomKeys(2..200)
-    println("Public key: Modulus = ${pair.first.modulus}, Exponent = ${pair.first.exponent}")
-    println("Private key: Modulus = ${pair.second.modulus}, D = ${pair.second.d}")
-    val encrypt = 5
-    println("Encrypting $encrypt using the keys = ${rsaEncrypt(encrypt, pair.first)}")
-    val result = rsaEncrypt(encrypt, pair.first)
-    println("Decrypting $result using the keys = ${rsaDecrypt(result.toInt(), pair.second)}")
-}
