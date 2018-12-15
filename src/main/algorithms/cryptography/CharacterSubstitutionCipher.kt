@@ -68,13 +68,3 @@ fun charSubstituteSecurelyEncrypt(text: String, keyLength: Int = 2): Pair<String
     }
     return Pair(result, key)
 }
-
-fun main(args: Array<String>) {
-    var input = readLine()!!
-    while (input.isEmpty()) input = readLine()!!
-    val pair = charSubstituteSecurelyEncrypt(input)
-    println("Initial = $input")
-    println("Key = ${pair.second}")
-    println("Result = ${pair.first}")
-    println("After decryption = ${charSubstituteDecrypt(pair.first, pair.second)}")
-}

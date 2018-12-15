@@ -130,10 +130,18 @@ class RSAPrivateKey(val modulus: Int, val d: Int)
 
 
 fun main(args: Array<String>) {
-    var message = "Hello!"
+    var message = "Hello World!"
     val keys = generateRandomKeys(1..100, 200)
     val result = rsaEncrypt(message, keys.first)
     val decrypt = rsaDecrypt(result.first, result.second, keys.second)
+    var charRepresentation = ""
+    message.forEach { charRepresentation += " " + it.toInt().toString() }
+    println("Initial message = $message, int representation = $charRepresentation")
     println("Encrypting $message with key (mod = ${keys.first.modulus}, e = ${keys.first.exponent}) = ${result.first} with block size = ${result.second}")
+    var chunks = result.first.chunked(result.second)
+    print("Chunked in blocks = ")
+    chunks.forEach { print(" $it") }
+    println()
+    println(" Original = $charRepresentation")
     println("Decrypting ${result.first} with block size ${result.second} with key (mod = ${keys.second.modulus}, d = ${keys.second.d}) = $decrypt")
 }
