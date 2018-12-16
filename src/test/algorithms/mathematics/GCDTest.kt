@@ -7,8 +7,8 @@ class GCDTest {
 
     @Test
     fun greatestCommonDivisor() {
-        assertEquals(6, main.algorithms.mathematics.greatestCommonDivisor(12, 30))
-        assertEquals(10, main.algorithms.mathematics.greatestCommonDivisor(20, 110))
-        assertEquals(5, main.algorithms.mathematics.greatestCommonDivisor(20, 125))
+        assertEquals(6, main.algorithms.mathematics.findGreatestCommonDivisor(12, 30))
+        assertEquals(10, main.algorithms.mathematics.findGreatestCommonDivisor(20, 110))
+        assertEquals(5, main.algorithms.mathematics.findGreatestCommonDivisor(20, 125))
     }
 }
