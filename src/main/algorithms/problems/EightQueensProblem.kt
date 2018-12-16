@@ -67,7 +67,7 @@ private fun eightQueensProblem(
 }
 
 fun main(args: Array<String>) {
-    solveEightQueensProblem(5).forEach {
+    solveEightQueensProblem(4).forEach {
         println()
         it.board.forEach { row ->
             println()

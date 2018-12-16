@@ -19,6 +19,9 @@ private fun generateRandomCoprime(range: IntRange, number: Int): Int {
     }
 }
 
+/**
+ * Generates two random keys from prime numbers within the range.
+ */
 fun generateRandomKeys(primeRange: IntRange): Pair<RSAPublicKey, RSAPrivateKey> {
     fun generateE(intRange: IntRange, n: Int, phi: Int): Int {
         for (i in intRange) {
@@ -76,6 +79,11 @@ fun generateRandomKeys(primeRange: IntRange, minimumModulus: Int): Pair<RSAPubli
     return Pair(public, private)
 }
 
+/**
+ * Encrypt a number.
+ * For this to work properly, the modulus has to be bigger than the number.
+ * The formula for encryption is c = m^e mod n, where e is the public key exponent and n is the modulus.
+ */
 fun rsaEncrypt(message: Int, publicKey: RSAPublicKey): Long {
     // Modulus must be bigger than the message to encrypt.
     if (publicKey.modulus <= message) return -1
@@ -142,6 +150,6 @@ fun main(args: Array<String>) {
     print("Chunked in blocks = ")
     chunks.forEach { print(" $it") }
     println()
-    println(" Original = $charRepresentation")
+    println("Original = $charRepresentation")
     println("Decrypting ${result.first} with block size ${result.second} with key (mod = ${keys.second.modulus}, d = ${keys.second.d}) = $decrypt")
 }
