@@ -22,6 +22,10 @@ import main.utils.swap
  */
 fun <T : Comparable<T>> bubbleSort(list: MutableList<T>) {
     var swapped: Boolean
+    /**
+     * Sort the list in order until there are no swaps in the entire iteration.
+     * If no swaps have been done—the list is ordered.
+     */
     do {
         swapped = false
         for (i in 0 until list.size - 1) {
