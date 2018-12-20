@@ -3,6 +3,10 @@ package main.algorithms.mathematics
 import kotlin.random.Random
 
 
+/**
+ * Two numbers are co-prime when the GCD of the numbers is 1.
+ * This method uses an algorithm called the Euclidean algorithm to compute GCD.
+ */
 fun areCoprime(first: Long, second: Long): Boolean {
     fun greatestCommonDivisor(first: Long, second: Long): Long {
         var smaller = if (first <= second) first else second
@@ -15,12 +19,18 @@ fun areCoprime(first: Long, second: Long): Boolean {
     return greatestCommonDivisor(first, second) == 1L
 }
 
+/**
+ * Returns all co-primes starting from 1 of a number, where limit is the biggest number to be checked for coprimality.
+ */
 fun returnAllCoprimes(number: Long, limit: Long = number): List<Long> {
     val result = ArrayList<Long>()
     for (i in 1..limit) if (areCoprime(number, i)) result.add(i)
     return result
 }
 
+/**
+ * Returns a specified amount of the closest co-primes in either direction from the number.
+ */
 fun returnClosestCoprimes(number: Long, amount: Int, increment: Boolean = false): List<Long> {
     val result = ArrayList<Long>()
     when (increment) {
@@ -44,6 +54,9 @@ fun returnClosestCoprimes(number: Long, amount: Int, increment: Boolean = false)
     return result
 }
 
+/**
+ * Generates a random prime number within range, using isPrime() function to check for primality.
+ */
 fun generateRandomPrime(range: IntRange): Int{
     val count = range.count()
     var i = 0
@@ -56,6 +69,11 @@ fun generateRandomPrime(range: IntRange): Int{
     } while (true)
 }
 
+/**
+ * This method returns true if the number is a prime number.
+ * Simply, it checks all the numbers up to the numbers square root and returns false if the number is divisible by any,
+ * otherwise returns true.
+ */
 fun isPrime(num: Long): Boolean {
     if (num < 1) return false
     if (num > 10 && (num % 2 == 0L || num % 3 == 0L)) return false
