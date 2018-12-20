@@ -1,5 +1,12 @@
 package main.algorithms.cryptography
 
+/**
+ * Caesar cipher is a more advanced substitution cipher than Atbash cipher.
+ * Caesar cipher shifts all the letters in the alphabet by a certain amount, and then substitutes the letters with
+ * the ones on positions i + s, where i is the index of the original letter, and s is the shift number.
+ * The shift number is found out by computing shift % alphabet.size, where shift is the desired shift by the user and alphabet.size
+ * is the number of letters in the alphabet.
+ */
 fun caesarEncrypt(text: String, shift: Int): String{
     val alphabet = listOf(
         'a', 'b', 'c', 'd', 'e',
