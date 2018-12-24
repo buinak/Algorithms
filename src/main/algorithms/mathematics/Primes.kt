@@ -88,6 +88,11 @@ fun isPrime(num: Long): Boolean {
     return true
 }
 
+/**
+ * Uses a method called sieve of Eratosthenes to get all prime numbers until the limit.
+ * Works by adding all the numbers in an arraylist first and then removing all the multiples of every single number in that
+ * list.
+ */
 fun getAllPrimesSieve(limit: Int): List<Int> {
     val result = ArrayList<Int>()
     for (i in 2..limit) {
@@ -108,6 +113,9 @@ fun getAllPrimesSieve(limit: Int): List<Int> {
     return result
 }
 
+/**
+ * Gets all primes until the limit by checking whether every number in the loop is a prime number.
+ */
 fun getAllPrimesPlain(limit: Int): List<Int> {
     val result = ArrayList<Int>()
     for (i in 2..limit) if (isPrime(i.toLong())) result.add(i)
