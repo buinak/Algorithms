@@ -1,7 +1,7 @@
 package main.algorithms.searching
 
 /**
- * Binary search, assumes that the list is sorted.
+ * Binary stringSearch, assumes that the list is sorted.
  * Splits the list in half with every single iteration, bringing the worst case running time to O(log n)
  *
  * Time complexity per case:

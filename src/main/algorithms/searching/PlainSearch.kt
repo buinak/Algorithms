@@ -1,7 +1,7 @@
 package main.algorithms.searching
 
 /**
- * Plain list search.
+ * Plain list stringSearch.
  * Goes through every single element and finds the index of the value by comparing the current element in the loop
  * with the value.
  *

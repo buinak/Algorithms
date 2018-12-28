@@ -1,6 +1,6 @@
-package main.algorithms.searching
+package main.algorithms.strings
 
-fun search(text: String, pattern: String): Int {
+fun stringSearch(text: String, pattern: String): Int {
     //if the searched text is longer than the original
     if (pattern.length > text.length) return -1
     //if the searched text is null
