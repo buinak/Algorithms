@@ -1,9 +1,17 @@
 package main.algorithms.problems
 
+/**
+ * Represents a chessboard matrix.
+ * Can either be instantiated from an existing chessboard (in which case it copies it) or from a size,
+ * in which case it fills all the cells with empty values.
+ */
 class Chessboard {
 
     val board = ArrayList<ArrayList<Int>>()
 
+    /**
+     * Fills the matrix with values representing empty cells.
+     */
     constructor(size: Int) {
         for (i in 1..size) {
             val newList = ArrayList<Int>()
@@ -14,6 +22,9 @@ class Chessboard {
         }
     }
 
+    /**
+     * Copies an existing chessboard. 
+     */
     constructor(chessboard: Chessboard) {
         for (i in 0 until chessboard.board.size) {
             val newList = ArrayList<Int>()
