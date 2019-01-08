@@ -23,7 +23,7 @@ class Chessboard {
     }
 
     /**
-     * Copies an existing chessboard. 
+     * Copies an existing chessboard.
      */
     constructor(chessboard: Chessboard) {
         for (i in 0 until chessboard.board.size) {
@@ -42,6 +42,9 @@ class Chessboard {
     }
 }
 
+/**
+ * Solves eight queens problem for a chessboard of a given size.
+ */
 fun solveEightQueensProblem(size: Int): List<Chessboard> = eightQueensProblem(Chessboard(size), 0, ArrayList())
 
 private fun isBoardSafe(chessboard: Chessboard): Boolean {
