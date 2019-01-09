@@ -1,6 +1,5 @@
 package main.algorithms.sorting
 
-import main.utils.getStringRepresentation
 import main.utils.swap
 
 private fun <T : Comparable<T>> maxHeapify(list: MutableList<T>, index: Int, heapSize: Int) {
@@ -27,12 +26,4 @@ fun <T: Comparable<T>> heapSort(list: MutableList<T>){
         list.swap(0, i)
         maxHeapify(list, 0, --heapSize)
     }
-}
-
-fun main(args: Array<String>) {
-    var list = arrayListOf(2, 8, 1, 14, 7, 9, 3, 10, 4, 16)
-    println(list.getStringRepresentation())
-    heapSort(list)
-    println(list.getStringRepresentation())
-
 }

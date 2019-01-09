@@ -11,7 +11,3 @@ fun stringLength(text: String): Int {
         i++
     }
 }
-
-fun main(args: Array<String>) {
-    println(stringLength("Tuna!"))
-}
