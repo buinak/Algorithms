@@ -6,7 +6,7 @@ fun stringSearch(text: String, pattern: String): Int {
     //if the searched text is null
     if (pattern.length == 0) return 0
 
-    for (i in 0 until text.length){
+    for (i in 0 until text.length - pattern.length){
         var j = i
         while (text[j] == pattern[j - i]){
             if ((j - i) + 1 == pattern.length) return i
