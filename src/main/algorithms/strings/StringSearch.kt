@@ -4,7 +4,7 @@ fun stringSearch(text: String, pattern: String): Int {
     //if the searched text is longer than the original
     if (pattern.length > text.length) return -1
     //if the searched text is null
-    if (pattern.length == 0) return 0
+    if (pattern.isEmpty()) return 0
 
     for (i in 0 until text.length - pattern.length){
         var j = i
