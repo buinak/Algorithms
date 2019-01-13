@@ -2,7 +2,6 @@ package main.algorithms.mathematics
 
 /**
  * The least common multiple is found out by using the principle that
- *
  * lcm(a, b) = (a * b) / gcd(a, b)
  *
  * And using an efficient algorithm called the Euclidean algorithm to compute the greatest common divisor.
