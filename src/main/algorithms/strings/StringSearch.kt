@@ -1,5 +1,7 @@
 package main.algorithms.strings
 
+import kotlin.test.assertEquals
+
 fun stringSearch(text: String, pattern: String): Int {
     //if the searched text is longer than the original
     if (pattern.length > text.length) return -1
@@ -15,4 +17,11 @@ fun stringSearch(text: String, pattern: String): Int {
         }
     }
     return -1
+}
+
+//Test code to validate the solution.
+fun main(args: Array<String>) {
+    assertEquals(3, stringSearch("category", "ego"))
+    assertEquals(0, stringSearch("category", ""))
+    assertEquals(-1, stringSearch("category", "egoegoegoego"))
 }
