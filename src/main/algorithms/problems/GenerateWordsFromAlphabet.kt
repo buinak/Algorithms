@@ -37,11 +37,3 @@ fun generateWordsUpperBoundLength(length: Int, alphabet: List<Char>): List<Strin
     }
     return result
 }
-
-//TODO: remove this
-fun main() {
-    generateWordsFixedLength(3, listOf('A', 'b', 'C', 'd')).forEach { println(it) }
-    println()
-    println()
-    generateWordsUpperBoundLength(3, listOf('A', 'b', 'C', 'd')).forEach { println(it) }
-}

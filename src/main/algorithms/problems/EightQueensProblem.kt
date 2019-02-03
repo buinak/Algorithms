@@ -79,13 +79,3 @@ private fun eightQueensProblem(
     }
     return solutions
 }
-
-fun main(args: Array<String>) {
-    solveEightQueensProblem(4).forEach {
-        println()
-        it.board.forEach { row ->
-            println()
-            row.forEach { number -> print("$number ") }
-        }
-    }
-}
