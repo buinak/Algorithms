@@ -6,6 +6,8 @@ import main.algorithms.searching.binarySearch
  * Methods are assuming the sorted list.
  */
 
+//TODO: Tests!
+
 
 /**
  * O(n^2) worst time complexity
@@ -48,13 +50,4 @@ fun findAnyPairProducesSumLinear(t: List<Int>, sum: Int): Pair<Int, Int>{
         }
     }
     return Pair(-1, -1)
-}
-
-
-
-fun main(args: Array<String>) {
-    val t = listOf(1, 3, 7, -5, 4, 11, 17, 2).sorted()
-    println(findAnyPairProducesSumNaive(t, 8))
-    println(findAnyPairProducesSumBinarySearch(t, 8))
-    println(findAnyPairProducesSumLinear(t, 8))
 }
