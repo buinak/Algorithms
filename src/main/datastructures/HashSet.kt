@@ -3,7 +3,7 @@ package main.datastructures
 import java.util.LinkedList
 import kotlin.random.Random
 
-class HashTable<T> {
+class HashSet<T> {
     private val INITIAL_SIZE = 16
     private val LOAD_FACTOR = 1
 
@@ -48,7 +48,7 @@ class HashTable<T> {
 
 fun main(args: Array<String>) {
     fun testAdditionAndLookup(){
-        val hsh = HashTable<String>()
+        val hsh = HashSet<String>()
 
         hsh.add("A")
         hsh.add("B")
@@ -66,7 +66,7 @@ fun main(args: Array<String>) {
             'p', 'q', 'r', 's', 't',
             'u', 'v', 'w', 'x', 'y',
             'z')
-        val hsh = HashTable<String>()
+        val hsh = HashSet<String>()
 
         for (i in 1..50){
             var str = ""
