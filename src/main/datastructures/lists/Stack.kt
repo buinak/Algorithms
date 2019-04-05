@@ -1,4 +1,4 @@
-package main.datastructures
+package main.datastructures.lists
 
 /**
  * A basic Stack implementation using linked nodes.

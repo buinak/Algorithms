@@ -1,6 +1,6 @@
 package test.datastructures
 
-import main.datastructures.Queue
+import main.datastructures.lists.Queue
 import org.junit.Assert.*
 import org.junit.Test
 import test.TestConstants

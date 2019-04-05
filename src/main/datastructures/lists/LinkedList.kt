@@ -1,4 +1,4 @@
-package main.datastructures
+package main.datastructures.lists
 
 /**
  * A Linked list is a data structure in which every element in the list stores a pointer

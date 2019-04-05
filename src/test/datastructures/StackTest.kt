@@ -1,6 +1,6 @@
 package test.datastructures
 
-import main.datastructures.Stack
+import main.datastructures.lists.Stack
 import org.junit.Test
 
 import test.TestConstants

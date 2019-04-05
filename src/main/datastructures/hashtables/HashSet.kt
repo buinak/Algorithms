@@ -1,6 +1,6 @@
-package main.datastructures
+package main.datastructures.hashtables
 
-import java.util.LinkedList
+import java.util.*
 import kotlin.random.Random
 
 class HashSet<T> {

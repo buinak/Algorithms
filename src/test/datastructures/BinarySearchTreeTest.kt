@@ -1,7 +1,6 @@
 package test.datastructures
 
-import main.datastructures.BinarySearchTree
-import main.datastructures.RedBlackTree
+import main.datastructures.trees.BinarySearchTree
 import org.junit.Test
 
 import org.junit.Assert.*

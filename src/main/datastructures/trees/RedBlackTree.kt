@@ -1,4 +1,6 @@
-package main.datastructures
+package main.datastructures.trees
+
+import main.datastructures.lists.Queue
 
 class RedBlackTree<T : Comparable<T>> {
 

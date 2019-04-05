@@ -1,6 +1,6 @@
 package test.datastructures
 
-import main.datastructures.LinkedList
+import main.datastructures.lists.LinkedList
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import test.TestConstants.AMOUNT_OF_TESTS

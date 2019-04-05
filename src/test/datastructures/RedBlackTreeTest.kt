@@ -1,6 +1,6 @@
 package test.datastructures
 
-import main.datastructures.RedBlackTree
+import main.datastructures.trees.RedBlackTree
 import org.junit.Test
 
 import org.junit.Assert.*

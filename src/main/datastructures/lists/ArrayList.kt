@@ -1,6 +1,4 @@
-package main.datastructures
-
-import kotlin.random.Random
+package main.datastructures.lists
 
 class ArrayList<T>(size: Int = 10){
     private var array = Array<Any?>(size) { }
